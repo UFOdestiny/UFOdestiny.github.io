@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       # 4.0 to match the Ruby that wrote Gemfile.lock (BUNDLED WITH 4.0.6):
       # an older Ruby ships an older RubyGems that does not understand the
@@ -39,7 +39,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y imagemagick
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.x"
 
