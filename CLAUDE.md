@@ -79,10 +79,13 @@ over adding an eighth.
   theme puts a lot of prose at 0.7–0.9rem; the rules there raise the parts this
   site renders — the `/cv/` table of contents (0.8rem, the one that reads as
   broken), the `.post-description` line under each page title, a paper's
-  abstract, the footer, and inside `/cv/` the location lines and the ten `<h6>`s
+  abstract, and inside `/cv/` the location lines and the ten `<h6>`s
   the CV template sizes with an inline `style="font-size: 0.95rem"` (an inline
-  declaration is why that one rule needs `!important`). Badges, icons and
-  monospace stay small on purpose — the reasons are at each rule. Two things to
+  declaration is why that one rule needs `!important`). Badges, icons, monospace
+  and the footer stay small on purpose — the reasons are at each rule, and the
+  footer's is a hard constraint: the copyright line is 912px at 1rem against the
+  900px the container gives it, so it only fits on one line at the gem's own
+  0.9rem. Check that measurement before editing `footer_text` in `_config.yml`. Two things to
   know when adding to it: `al-folio-cv.css` is a *separate* stylesheet loaded
   after `main.css`, so a `/cv/` rule needs the `.cv` prefix to outrank the gem
   on specificity rather than on order; and `tools/check.py` warns about any new
@@ -319,6 +322,25 @@ npx --yes sass@1 --style=compressed --no-source-map \
 `out.css` is byte-for-byte what the deploy produces, apart from `$max-content-width`
 being hardcoded. Diffing it against the live `/assets/css/main.css` is the fastest
 way to see what a Sass change actually did.
+
+"Does this text fit on one line?" is answerable too, and worth answering rather
+than guessing — the footer is one line only because of it. The site's body font
+is Roboto Light, and Google Fonts hands out the real TTF:
+
+```bash
+# the src: url(...) in this CSS is the .ttf itself
+curl -s "https://fonts.googleapis.com/css?family=Roboto:300" | grep -o 'https://[^)]*\.ttf'
+curl -sLo roboto300.ttf "<that url>"
+python3 -c "
+from PIL import ImageFont
+text = '(c) Copyright 2026 ...'                      # the rendered line, tags stripped
+f = ImageFont.truetype('roboto300.ttf', size=round(14.4 * 64))   # 64x for precision
+print(f.getlength(text) / 64, 'px vs 900px available')           # 930px container - 2x15px
+"
+```
+
+PIL's basic layout skips kerning, so it reads a shade wider than a browser —
+which is the safe direction for a "does it fit" answer.
 
 There is no local build: `serve.sh` and its conda Ruby env were removed once the
 env stopped existing, and no Ruby is installed. Every change is verified by the

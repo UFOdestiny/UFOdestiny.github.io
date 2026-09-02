@@ -88,6 +88,21 @@ html[data-theme="dark"] .bibsearch-form-input {
  *     they are sized relative to the text they sit beside on purpose.
  *   - `pre`, `code` (0.875rem): monospace at 16px next to 16px prose reads as
  *     bigger than the prose. No page here has a code block anyway.
+ *   - `footer.sticky-bottom` (0.9rem, the gem's own size): the copyright line
+ *     has to fit on one line, and it does not have room for 1rem. Measured in
+ *     Roboto Light against the 900px the `.container` gives it (930px max-width
+ *     less 15px of padding a side):
+ *
+ *         "(c) Copyright 2026 Dahai Yu. Powered by Jekyll with the al-folio
+ *          theme. Hosted by GitHub Pages. Last updated: September 02, 2026."
+ *
+ *         1rem/16px    912px   wraps by 12px
+ *         0.95rem      867px   fits, 33px spare -- about four characters
+ *         0.9rem       821px   fits, 79px spare
+ *
+ *     0.9rem is the one with room for `footer_text` in _config.yml to grow, so
+ *     the fix here was to drop our rule rather than add one. Below a ~851px
+ *     viewport the line wraps whatever we do -- the container is fluid there.
  * -------------------------------------------------------------------------- */
 
 /* The /cv/ table of contents. This is the one the eye actually complains about:
@@ -108,12 +123,6 @@ html[data-theme="dark"] .bibsearch-form-input {
 /* A paper's abstract, revealed by the "Abs" button on /publications/. Body text
  * in a full-width column -- there is no layout reason for it to be smaller. */
 .publications ol.bibliography li .hidden {
-  font-size: 1rem;
-}
-
-/* The footer copyright line (`footer_fixed: false`, so `.sticky-bottom` is the
- * one that renders; `_sass/_footer.scss` is our other change to it). */
-footer.sticky-bottom {
   font-size: 1rem;
 }
 
