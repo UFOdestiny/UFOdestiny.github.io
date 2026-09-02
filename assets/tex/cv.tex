@@ -1,0 +1,117 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{parskip}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[scale=0.9]{geometry}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage[unicode,draft=false]{hyperref}
+\usepackage{fontawesome5}
+
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{10pt}{10pt}
+
+\definecolor{linkcolour}{rgb}{0,0.2,0.6}
+\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour,linkcolor=linkcolour}
+\definecolor{PubJournal}{HTML}{C43122}
+\definecolor{FSUBrown}{HTML}{6B3F2A}
+\definecolor{PKURed}{HTML}{8B1A1A}
+
+% 移除了论文标题的红色，仅保持加粗
+\newcommand{\jourpub}[1]{\textcolor{PubJournal}{\textbf{[#1]}}}
+\newcommand{\pubtitle}[1]{\textbf{#1}}
+
+\begin{document}
+\pagestyle{empty}
+\vspace*{-1.3cm}
+
+\begin{tabularx}{\linewidth}{@{} C @{}}
+
+\Huge{Dahai Yu} \\[7.5pt]
+
+
+\href{https://ufodestiny.github.io}{\raisebox{-0.05\height}\faGlobe\ Homepage} $|$
+\href{mailto:dahai.yu@fsu.edu}{\raisebox{-0.05\height}\faEnvelope\ dahai.yu@fsu.edu} $|$
+\href{tel:+18506885790}{\raisebox{-0.05\height}\faMobile\ (+1) 850-688-5790} $|$
+\href{https://scholar.google.com/citations?user=8eH-vRUAAAAJ}{\raisebox{-0.05\height}\faGraduationCap\ Google Scholar} $|$
+\href{https://github.com/UFOdestiny}{\raisebox{-0.05\height}\faGithub\ GitHub} \\
+\end{tabularx}
+
+
+\vspace*{-0.25cm}
+
+
+\section{Education}
+\begin{tabularx}{\linewidth}{@{}X r@{}}
+Ph.D. in Computer Science (GPA: \textbf{4.0/4.0}), \textbf{\textcolor{FSUBrown}{Florida State University}} & 2023 -- Present \\
+
+B.S. in Big Data Management and Application, \textbf{\textcolor{PKURed}{Peking University}} & 2019 -- 2023 \\
+
+Honors: Third Prize Scholarship; Challenge Cup (Second Prize), \textbf{\textcolor{PKURed}{Peking University}} & 2021 -- 2022 \\
+
+Honors: The Dean’s Award for Doctoral Excellence, \textbf{\textcolor{FSUBrown}{Florida State University}} & 2026 \\
+
+\end{tabularx}
+\vspace*{-0.25cm}
+
+\section{Skills}
+\begin{tabularx}{\linewidth}{@{}l X@{}}
+\textbf{LLM Post-Training}: SFT, instruction tuning, preference optimization (DPO/RLHF), reward modeling\\
+\textbf{AI}: GNNs, spatiotemporal modeling, uncertainty quantification \\
+
+% \textbf{Programming}: Python, C++, Java \\
+\end{tabularx}
+\vspace*{-0.25cm}
+
+\section{Intern Experience}
+
+\begin{tabularx}{\linewidth}{ @{}l r@{} }
+\textbf{X-tech (Beijing) Ltd. \& Hundsun Technologies (Beijing) Inc.} & \hfill 2022 - 2023 \\[3.75pt]
+\multicolumn{2}{@{}X@{}}{\textbf{Quantitative Developer Intern (Options \& Backtesting)}}\\[3.75pt]
+\multicolumn{2}{@{}X@{}}{\textbullet\ Built a \textbf{quantitative option analytics platform} for indicator monitoring, and strategy diagnostics.}\\[2pt]
+\multicolumn{2}{@{}X@{}}{\textbullet\ Designed and implemented a \textbf{backtesting pipeline} with transaction-cost modeling and risk metrics.}\\[2pt]
+% \multicolumn{2}{@{}X@{}}{\textbullet\ Developed Java backend services and Vue.js dashboards for option signal tracking, portfolio exposure visualization, and daily strategy reporting.}\\[3.75pt]
+
+\end{tabularx}
+\vspace*{-0.25cm}
+
+\section{Publications}
+
+\begin{enumerate}[leftmargin=1.2em,label=\arabic*.,itemsep=1pt,topsep=1pt]
+
+% ==================== Published / Accepted ====================
+
+\item \jourpub{KDD'27 (submitted)} \textbf{Dahai Yu}, Lin Jiang, Rongchao Xu, and Guang Wang* \\
+TrAC: Trace-Conditioned Answer Consistency for Efficient Uncertainty Quantification in LLMs
+
+\item \jourpub{AAAI'27 (submitted)} \textbf{Dahai Yu}, Lin Jiang, Rongchao Xu, and Guang Wang* \\
+SymboUQ: Symbolic Uncertainty Quantification for Spatial Reasoning in LLMs
+
+\item \jourpub{KDD'26} \textbf{Dahai Yu}, Rongchao Xu, Lin Jiang, and Guang Wang* \\
+EnergyMamba: An Uncertainty-Aware Graph-Enhanced Selective State Space Model for Energy Consumption Prediction
+
+\item \jourpub{AAAI'26} \textbf{Dahai Yu}, Rongchao Xu, Dingyi Zhuang, Yuheng Bu, Shenhao Wang, and Guang Wang* \\
+TrustEnergy: A Unified Framework for Accurate and Reliable User-level Energy Usage Prediction
+
+\item \jourpub{IJCAI'26} \textbf{Dahai Yu}, Lin Jiang, Rongchao Xu, and Guang Wang* \\
+HealthMamba: An Uncertainty-aware Spatiotemporal Graph State Space Model for Effective and Reliable Healthcare Facility Visit Prediction
+
+\item \jourpub{ACM SIGSPATIAL'25} \textbf{Dahai Yu}, Dingyi Zhuang, Lin Jiang, Rongchao Xu, Xinyue Ye, Yuheng Bu, Shenhao Wang, and Guang Wang*. \\
+UQGNN: Uncertainty Quantification of GNNs for Multivariate Spatiotemporal Prediction
+
+\item \jourpub{ACM IMWUT/UbiComp'26} Rongchao Xu, Lin Jiang, \textbf{Dahai Yu}, Ximiao Li, and Guang Wang* \\
+SynHAT: A Two-stage Coarse-to-Fine Diffusion Framework for Synthesizing Human Activity Traces
+
+\item \jourpub{IJCAI'25} Lin Jiang, \textbf{Dahai Yu}, Rongchao Xu, Tian Tang, and Guang Wang* \\
+Uncertainty-aware Predict-Then-Optimize Framework for Equitable Post-Disaster Power Restoration
+
+\item \jourpub{Management Science (Under minor revision)} Leng Yan, Yunxin Sang, \textbf{Dahai Yu}, Binwu Wang, and Guang Wang* \\
+FusionTransNet for Smart Urban Mobility: Spatiotemporal Traffic Forecasting Through Multimodal Network Integration
+
+\end{enumerate}
+
+\vfill
+
+\end{document}

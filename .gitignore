@@ -14,3 +14,6 @@ al-folio-upgrade-report.md
 .DS_store
 .idea
 .ruby-version
+
+# tools/cvfit.py is importable, so Python may leave bytecode here
+__pycache__/

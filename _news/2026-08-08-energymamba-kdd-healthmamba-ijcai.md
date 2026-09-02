@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-**EnergyMamba** appears in the **ACM SIGKDD 2026** proceedings (AI for Science workshop), and **HealthMamba** is accepted to **IJCAI 2026**.
+**EnergyMamba** appears in the **ACM SIGKDD 2026** proceedings, and **HealthMamba** is accepted to **IJCAI 2026**.
