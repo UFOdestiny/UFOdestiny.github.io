@@ -34,7 +34,9 @@ nav_order: 1
     border: 1px solid var(--global-divider-color);
     border-radius: 4px;
     padding: 0.1rem 0.55rem;
-    font-size: 0.9rem;
+    /* 1rem, like every other piece of reading text -- see the font-size floor
+       in _sass/_local.scss. */
+    font-size: 1rem;
     color: var(--global-text-color-light);
   }
   .publication-years a:hover {

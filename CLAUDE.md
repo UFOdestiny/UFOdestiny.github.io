@@ -73,6 +73,22 @@ over adding an eighth.
   (light card on a dark page), so on a site with no newsletter it was just a
   white rectangle.
 
+  The same file also holds the site's **minimum reading size: 1rem**, the size
+  of the home page subtitle (`<p class="desc">` in `_layouts/about.liquid`, a
+  class the gem never styles, so it inherits the body: Roboto 300, 1rem). The
+  theme puts a lot of prose at 0.7–0.9rem; the rules there raise the parts this
+  site renders — the `/cv/` table of contents (0.8rem, the one that reads as
+  broken), the `.post-description` line under each page title, a paper's
+  abstract, the footer, and inside `/cv/` the location lines and the ten `<h6>`s
+  the CV template sizes with an inline `style="font-size: 0.95rem"` (an inline
+  declaration is why that one rule needs `!important`). Badges, icons and
+  monospace stay small on purpose — the reasons are at each rule. Two things to
+  know when adding to it: `al-folio-cv.css` is a *separate* stylesheet loaded
+  after `main.css`, so a `/cv/` rule needs the `.cv` prefix to outrank the gem
+  on specificity rather than on order; and `tools/check.py` warns about any new
+  `font-size` below 1rem in `_sass/_local.scss` or `_pages/`, with
+  `FONT_FLOOR_EXCEPTIONS` as the escape hatch.
+
   **Shadowing `_sass/_variables.scss` does not work** — it was tried first and
   the deployed CSS still came out magenta. Dart Sass resolves a `@use` relative
   to the importing file before it consults the load path, and the gem's
@@ -238,6 +254,31 @@ only be verified by a DNS TXT record on github.io, which is GitHub's domain, not
 ours — and a token issued for DNS or for the HTML-file method will not verify in
 the meta tag.
 
+## Checks
+
+`python3 tools/check.py` is the only thing here that can validate a change
+without a Ruby toolchain, and it deliberately checks what a *build* would not:
+conventions that live in two places at once. Today that is the
+`plugins:`/`Gemfile` pair, `abbr` vs `_data/venues.yml`, `preview` vs the files
+in `assets/img/publication_preview/` (including the 800px-wide/landscape rule),
+custom bib fields vs `filtered_bibtex_keywords`, `about.md`'s
+`/publications/#key` anchors vs the citekeys, the email across `socials.yml` /
+`cv.yml` / `about.md`, `cv_pdf` across `socials.yml` / `cv.md`, `nav_order`
+collisions, `_news` filename vs front-matter dates, the Ruby pin shared by the
+two workflows, and the presence of the local overrides with their
+`Local change:` markers. It also parses every YAML file and front matter, which
+a build does catch — just slowly.
+
+**When you add a convention that has to hold in two files, add a check for it.**
+That is the whole point of the file; a comment in one of the two places is what
+this repo already tried. Errors are things that render wrong or fail; warnings
+are things that will rot. `--strict` fails on warnings and is what CI uses on a
+branch or PR (`ci.yml`); the deploy runs it without `--strict`, because a
+warning is not a reason to block publishing a correct site.
+
+PyYAML is the one dependency (`python3 -m pip install --user pyyaml`); without
+it the script still runs, skips YAML parsing, and says so.
+
 ## Building and deploying
 
 Deployment is GitHub Actions only (`.github/workflows/deploy.yml`, push to
@@ -250,6 +291,34 @@ is ever set back to a branch, that built-in job fails on every push while
 file, which would publish raw source over the good deployment. CI Ruby is pinned
 to `4.0` to match whatever wrote `Gemfile.lock`; older RubyGems cannot parse the
 libc-qualified platform names (`x86_64-linux-gnu`) in `PLATFORMS`.
+
+`ci.yml` is that same build without the deploy, on pull requests and on pushes
+to any branch but `main`, so a change can be verified before it is live. Both
+workflows set up Ruby and ImageMagick themselves rather than sharing a reusable
+workflow for four lines, and `tools/check.py` asserts they pin the same Ruby.
+Gem and action updates arrive as monthly Dependabot PRs
+(`.github/dependabot.yml`) that `ci.yml` builds — the `al_folio_*` gems are
+pinned to exact versions, so `bundle update` alone never moves them and nothing
+else announces that a new one exists.
+
+The stylesheet, at least, *can* be compiled locally without Ruby — dart-sass
+via `npx` plus the gem tarball, which is how the 1rem floor above was verified
+(each rule has to win the cascade, and two of them only win on specificity):
+
+```bash
+cd "$(mktemp -d)" && curl -sO https://rubygems.org/downloads/al_folio_core-1.0.15.gem
+tar xf al_folio_core-1.0.15.gem && tar xzf data.tar.gz          # -> the gem's _sass/
+python3 - <<'EOF'                                               # strip front matter + Liquid
+s = open('/path/to/repo/assets/css/main.scss').read().split('---', 2)[2]
+open('entry.scss', 'w').write(s.replace('{{ site.max_width | default:  "930px" }}', '930px'))
+EOF
+npx --yes sass@1 --style=compressed --no-source-map \
+  --load-path=/path/to/repo/_sass --load-path=_sass entry.scss out.css
+```
+
+`out.css` is byte-for-byte what the deploy produces, apart from `$max-content-width`
+being hardcoded. Diffing it against the live `/assets/css/main.css` is the fastest
+way to see what a Sass change actually did.
 
 There is no local build: `serve.sh` and its conda Ruby env were removed once the
 env stopped existing, and no Ruby is installed. Every change is verified by the

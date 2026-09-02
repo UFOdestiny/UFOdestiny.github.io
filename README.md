@@ -12,6 +12,14 @@ seven does and why.
 Edit a file, push to `main`, and GitHub Actions rebuilds and publishes the site.
 Nothing has to be built locally.
 
+Before pushing, `python3 tools/check.py` (a few seconds, no Ruby needed) checks
+the conventions that live in two files at once — a plugin named in `_config.yml`
+but not the `Gemfile`, a `preview` pointing at a missing image, an
+`/publications/#key` link in `about.md` that no longer names an entry, the email
+drifting between `socials.yml`, `cv.yml` and `about.md`. Pushing to a branch or
+opening a pull request runs the same checks plus a full production build, so a
+mistake shows up as a red PR instead of a red deploy.
+
 ## What to edit
 
 | I want to…                       | Edit                                                        |
@@ -24,6 +32,7 @@ Nothing has to be built locally.
 | Link a coauthor's homepage       | `_data/coauthors.yml`                                       |
 | Recolor a venue badge            | `_data/venues.yml`                                          |
 | Site title, nav, feature flags   | `_config.yml`                                               |
+| Colours, font sizes, CSS tweaks  | `_sass/_local.scss`                                         |
 
 Navigation comes from the `nav:` / `nav_order:` front matter in `_pages/`:
 publications (1), news (2), CV (3). `about.md` sets neither — it is the site root
@@ -53,7 +62,10 @@ To move to a custom domain later, add a `CNAME` file with the domain, change
 `url:`, and point DNS at GitHub Pages — nothing else changes.
 
 Theme updates come from the gems, not from git: `bundle update`, then commit the
-new `Gemfile.lock`.
+new `Gemfile.lock`. Dependabot (`.github/dependabot.yml`) opens those as monthly
+pull requests instead — the `al_folio_*` gems are pinned to exact versions, so
+nothing else would ever tell you a new one exists. Each PR is built by the Check
+workflow before you merge it.
 
 ## Keeping the CV in sync
 

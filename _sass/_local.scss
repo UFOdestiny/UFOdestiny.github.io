@@ -65,3 +65,84 @@ html[data-theme="dark"] .bibsearch-form-input {
   font-weight: 700;
   border-bottom: none;
 }
+
+/* -----------------------------------------------------------------------------
+ * Minimum reading size: 1rem.
+ *
+ * The reference is the home page subtitle ("Ph.D. Student in Computer Science,
+ * Florida State University. Advised by ..."), which is `<p class="desc">` -- a
+ * class the gem never styles, so it inherits the body: Roboto 300, 1rem/16px.
+ * Everything a reader reads as prose should be at least that; the theme shrinks
+ * a lot of it to 0.7-0.9rem, and the /cv/ sidebar at 0.8rem was the worst of it.
+ *
+ * Each selector below repeats the gem's exactly, because this file only wins by
+ * coming later at equal specificity -- a shorter selector would lose. Sizes were
+ * read off the deployed CSS, not the source: /assets/css/main.css and
+ * /assets/css/al-folio-cv.css.
+ *
+ * Deliberately NOT raised, because they are labels or code rather than prose:
+ *   - `.badge` (75%): the venue badges on /publications/ and the date pills on
+ *     /cv/. Both are nowrap, and the /cv/ pill already fills its narrow
+ *     `col-md-2` date column at 12px -- 16px would push it out of the column.
+ *   - `i.iconlocation` / `i.icondepartment` (0.8rem) and the other CV icons:
+ *     they are sized relative to the text they sit beside on purpose.
+ *   - `pre`, `code` (0.875rem): monospace at 16px next to 16px prose reads as
+ *     bigger than the prose. No page here has a code block anyway.
+ * -------------------------------------------------------------------------- */
+
+/* The /cv/ table of contents. This is the one the eye actually complains about:
+ * a column of 0.8rem links in an otherwise 1rem page. The sidebar is a full
+ * `col-sm-3` (~200px) and `.toc-link` is `display: block`, so a longer section
+ * name wraps rather than overflowing. */
+#toc-sidebar .toc-link {
+  font-size: 1rem;
+}
+
+/* The one-line description under a page title (/publications/, /news/, /cv/).
+ * The home page's own subtitle is the same kind of line and sits at 1rem, so
+ * these three were the odd ones out. */
+.post-description {
+  font-size: 1rem;
+}
+
+/* A paper's abstract, revealed by the "Abs" button on /publications/. Body text
+ * in a full-width column -- there is no layout reason for it to be smaller. */
+.publications ol.bibliography li .hidden {
+  font-size: 1rem;
+}
+
+/* The footer copyright line (`footer_fixed: false`, so `.sticky-bottom` is the
+ * one that renders; `_sass/_footer.scss` is our other change to it). */
+footer.sticky-bottom {
+  font-size: 1rem;
+}
+
+/* -----------------------------------------------------------------------------
+ * The same floor inside /cv/.
+ *
+ * These rules need more than a matching selector: `al-folio-cv.css` is a
+ * separate stylesheet that the layout loads AFTER `main.css`, so at equal
+ * specificity the gem would win no matter where we sit in main.css. Prefixing
+ * with `.cv` (the wrapper `templates/cv/render.liquid` puts around the whole
+ * page) adds the class that outranks it.
+ * -------------------------------------------------------------------------- */
+
+/* The city under each date pill. `al-folio-cv.css` also sets `white-space:
+ * nowrap`, which was safe at 0.7rem but not at 1rem: "Tallahassee, FL, USA" is
+ * wider than the date column at 16px, and a nowrap overflow would sit on top of
+ * the entry beside it. Let it wrap instead. */
+.cv p.location {
+  font-size: 1rem;
+  white-space: normal;
+}
+
+/* The institution / area / summary lines under each entry title. The CV template
+ * writes `style="font-size: 0.95rem"` on these `<h6>`s inline, and an inline
+ * declaration outranks every selector -- `!important` is the only thing that
+ * reaches it. It is a 0.8px change on its own, but leaving three of the four
+ * lines in an entry at 0.95rem is exactly the unevenness this section is about.
+ * The inline `font-style: italic` on the summary line is a different property
+ * and still applies. */
+.cv h6[style] {
+  font-size: 1rem !important;
+}

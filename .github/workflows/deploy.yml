@@ -38,6 +38,20 @@ jobs:
       - name: Install ImageMagick
         run: sudo apt-get update && sudo apt-get install -y imagemagick
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      # The same checks the Check workflow runs on a branch or a PR, repeated
+      # here because a push straight to main never goes through that workflow.
+      # Warnings do not fail a deploy (no `--strict`): the site is correct enough
+      # to publish, and a blocked deploy over a warning is worse than the warning.
+      - name: Content checks
+        run: |
+          python3 -m pip install --quiet pyyaml
+          python3 tools/check.py
+
       - name: Build
         run: JEKYLL_ENV=production bundle exec jekyll build
 

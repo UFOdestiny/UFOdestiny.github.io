@@ -153,6 +153,7 @@ exclude:
   - Gemfile.lock
   - LICENSE
   - README.md
+  - tools # tools/check.py is a dev script; without this it is published at /tools/
   - vendor
 
 # Theme assets no page can request are pruned in _plugins/prune_theme_assets.rb,
