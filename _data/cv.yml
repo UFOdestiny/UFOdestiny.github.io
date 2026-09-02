@@ -1,0 +1,112 @@
+# CV content, rendered by the al_folio_cv plugin (rendercv format).
+# Delete a whole section and it disappears from /cv/.
+# The authority for everything here is assets/pdf/dahai_yu_cv.pdf: where this page
+# and that PDF disagreed, the PDF won. Keep them in sync when either changes.
+cv:
+  name: Dahai Yu
+  label: Ph.D. Student in Computer Science
+  email: dahai.yu@fsu.edu
+  location: Tallahassee, FL, USA
+  image: ""
+  summary: >
+    Computer Science Ph.D. student at Florida State University working on trustworthy
+    spatiotemporal machine learning — uncertainty quantification, generative models for
+    urban data, and decision pipelines for energy, healthcare access, and disaster resilience.
+
+  social_networks:
+    - network: GitHub
+      username: UFOdestiny
+    - network: LinkedIn
+      username: dahai-yu-0bb09a272
+
+  sections:
+    Education:
+      - institution: Florida State University
+        location: Tallahassee, FL, USA
+        url: https://www.cs.fsu.edu/
+        area: Computer Science
+        studyType: PhD
+        start_date: 2023
+        end_date: present
+        highlights:
+          - Advised by Prof. Guang Wang.
+          - GPA 4.0/4.0.
+          - Trustworthy spatiotemporal machine learning and generative models for urban data.
+
+      - institution: Peking University
+        location: Beijing, China
+        url: https://www.im.pku.edu.cn/
+        area: Big Data Management and Application
+        studyType: BS
+        start_date: 2019
+        end_date: 2023
+        highlights:
+          - Department of Information Management.
+          - Undergraduate research with Prof. Bolin Hua on text mining for scientific literature.
+
+    Experience:
+      - company: Florida State University
+        position: Graduate Research Assistant
+        location: Tallahassee, FL, USA
+        start_date: 2023
+        end_date: present
+        summary: >
+          Lead author on uncertainty-aware spatiotemporal prediction projects spanning
+          energy demand, human mobility, and healthcare access.
+        highlights:
+          - First-authored papers at AAAI, IJCAI, ACM SIGKDD, and ACM SIGSPATIAL; coauthored in ACM IMWUT.
+
+      - company: X-tech (Beijing) Ltd. & Hundsun Technologies (Beijing) Inc.
+        position: Quantitative Developer Intern (Options & Backtesting)
+        location: Beijing, China
+        start_date: 2022
+        end_date: 2023
+        highlights:
+          - Built a quantitative option analytics platform for indicator monitoring and strategy diagnostics.
+          - Designed and implemented a backtesting pipeline with transaction-cost modeling and risk metrics.
+
+    Awards:
+      - title: The Dean's Award for Doctoral Excellence
+        date: 2026
+        awarder: Florida State University
+      # The CV PDF lists both Peking University honors under one "2021 - 2022" range,
+      # so both carry that range; the badge shows only the first year.
+      - title: Challenge Cup, Second Prize
+        date: 2021-2022
+        awarder: Peking University
+      - title: Third Prize Scholarship
+        date: 2021-2022
+        awarder: Peking University
+
+    Skills:
+      - name: Programming
+        level: Advanced
+        icon: fa-solid fa-code
+        keywords: "Python, C/C++, Java, JavaScript, Bash"
+
+      - name: LLM Post-Training
+        level: Advanced
+        icon: fa-solid fa-comment-dots
+        keywords: "SFT, instruction tuning, preference optimization (DPO / RLHF), reward modeling"
+
+      - name: Machine Learning
+        level: Advanced
+        icon: fa-solid fa-brain
+        keywords: "PyTorch, PyTorch Geometric, diffusion models, graph neural networks, state space models, uncertainty quantification"
+
+      - name: Tools
+        level: Intermediate
+        icon: fa-solid fa-screwdriver-wrench
+        keywords: "Git, Linux, Slurm / HPC, LaTeX, Docker"
+
+    Languages:
+      - name: Chinese
+        summary: "Native speaker"
+
+      - name: English
+        summary: "Fluent"
+
+    Interests:
+      - name: Research
+        icon: fa-solid fa-tag
+        keywords: "Spatiotemporal data mining, uncertainty quantification, trustworthy machine learning, generative models, urban computing, AI for energy"

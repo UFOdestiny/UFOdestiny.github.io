@@ -1,0 +1,375 @@
+# -----------------------------------------------------------------------------
+# Site settings
+# -----------------------------------------------------------------------------
+
+title: blank # the website title (if blank, full name will be used instead)
+first_name: Dahai
+last_name: Yu
+# No `contact_note`: _layouts/about.liquid renders it only inside `{% if page.social %}`,
+# and _pages/about.md sets `social: false` (the icons live in the navbar). The email
+# is a plain link under the profile photo instead, via `profile.more_info` there.
+# Leads with the full name on purpose: this string is both the meta description and
+# the og:description, so it is the snippet a search for "Dahai Yu" shows.
+description: > # the ">" symbol means to ignore newlines until "footer_text:"
+  Dahai Yu is a Computer Science Ph.D. student at Florida State University (FSU),
+  working on trustworthy spatiotemporal machine learning, uncertainty quantification,
+  and generative models for urban data.
+footer_text: >
+  Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with the
+  <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
+  Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
+keywords: Dahai Yu, spatiotemporal data mining, uncertainty quantification, trustworthy machine learning, generative models, urban computing, Florida State University
+# Appended to the name in the home page's <title>, so the tab and the search
+# result read "Dahai Yu — Ph.D. Student, Florida State University" instead of a
+# bare name. Keep the whole title under ~60 characters or Google truncates it.
+tagline: Ph.D. Student, Florida State University
+
+# Feeds the schema.org Person entity in _includes/metadata.liquid (home page only).
+# This is what tells a search engine that this site *is* the Dahai Yu who is at FSU
+# and on Google Scholar / ORCID / DBLP, rather than a page that merely mentions him.
+person:
+  job_title: Ph.D. Student in Computer Science
+  affiliation: Florida State University
+  affiliation_url: https://www.cs.fsu.edu/
+  alumni_of: Peking University
+  alumni_of_url: https://english.pku.edu.cn/
+  # `knowsAbout` topics. Deliberately not derived from `keywords:` above, whose
+  # first item is the name itself -- that would claim he is an expert on himself.
+  knows_about:
+    - spatiotemporal data mining
+    - uncertainty quantification
+    - trustworthy machine learning
+    - generative models
+    - urban computing
+
+# Google Search Console verification, rendered as a <meta> by _includes/metadata.liquid.
+# Get it from a **URL prefix** property for https://ufodestiny.github.io/ verified with
+# "HTML tag" -- not from a "Domain" property, which can only be verified by a DNS TXT
+# record on github.io, a domain GitHub owns and we cannot touch. Verification is what
+# lets /sitemap.xml be submitted.
+google_site_verification: "-B5nGv1wXfdHicu7qOFOE_G40ZXREA850jKc9ciiZn8" # quoted: the token starts with a dash
+
+lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
+icon: 😎 # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
+
+# Deployed as the GitHub user site: the repo must be named `UFOdestiny.github.io`,
+# which is why `baseurl` stays empty. (A project repo would need `baseurl: "/<repo>"`
+# here, or every stylesheet and link 404s.)
+url: https://ufodestiny.github.io # the base hostname & protocol for your site
+baseurl: "" # the subpath of your site, e.g. /blog/. Leave blank for root
+last_updated: true # set to true if you want to display last updated in the footer
+back_to_top: true # set to false to disable the back to top button
+
+# -----------------------------------------------------------------------------
+# al-folio API (v1.x)
+# -----------------------------------------------------------------------------
+
+al_folio:
+  api_version: 1
+  style_engine: tailwind
+  tailwind:
+    version: 4.1.18
+    preflight: false
+    css_entry: assets/tailwind/app.css
+  # Distill is unused (no page uses `layout: distill` and `al_folio_distill` is
+  # not in `plugins`), but al_folio_core's config contract warns unless both
+  # `engine` and `source` are set.
+  distill:
+    engine: distillpub-template
+    source: al-org-dev/distill-template#al-folio
+  features:
+    cv:
+      enabled: true
+
+# -----------------------------------------------------------------------------
+# Layout
+# -----------------------------------------------------------------------------
+
+navbar_fixed: true
+footer_fixed: false # false = footer sits at the bottom of the page, not a floating bar
+search_enabled: true
+socials_in_search: true
+posts_in_search: true
+bib_search: true
+
+# Dimensions
+max_width: 930px
+
+# -----------------------------------------------------------------------------
+# Open Graph & Schema.org
+# -----------------------------------------------------------------------------
+# Display links to the page with a preview object on social media.
+# see https://schema.org/docs/faq.html for more information
+serve_og_meta: true # Include Open Graph meta tags in the HTML head
+serve_schema_org: true # Include Schema.org in the HTML head
+
+# The preview thumbnail for a shared link. Without it every share (LinkedIn, Slack,
+# WeChat, ...) is a text-only card. The theme prepends `url` + `baseurl`, so a
+# site-relative path is what belongs here.
+og_image: /assets/img/prof_pic.jpg
+
+# `_includes/metadata.liquid` is a local override of the gem file with the whole
+# Twitter card block deleted: this site has no X/Twitter presence, so it emitted
+# half-filled twitter:* tags for nothing. OpenGraph covers the same consumers.
+
+# There is no `analytics:` block and no site-verification keys: every analytics
+# provider is read by the `al_analytics` plugin, which this site does not load,
+# and the verification metas only matter once the site is registered with Google
+# Search Console or Bing Webmaster.
+
+# -----------------------------------------------------------------------------
+# Collections
+# -----------------------------------------------------------------------------
+
+collections:
+  news:
+    defaults:
+      layout: post
+    output: true
+    permalink: /news/:title/
+
+# -----------------------------------------------------------------------------
+# Jekyll settings
+# -----------------------------------------------------------------------------
+
+# Markdown and syntax highlight
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter_opts:
+    css_class: "highlight"
+    span:
+      line_numbers: false
+    block:
+      line_numbers: false
+      start_line: 1
+
+# Includes & excludes
+include: ["_pages"]
+exclude:
+  - CLAUDE.md
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+  - vendor
+
+# Theme assets no page can request are pruned in _plugins/prune_theme_assets.rb,
+# not here: `exclude` never sees them, because Jekyll's theme-assets reader walks
+# the gem's assets/ directory without consulting it.
+
+# Use al_folio_core as the theme runtime; local files can still override theme files.
+theme: al_folio_core
+
+# Plug-ins
+# Must stay in sync with the Gemfile: a plugin listed in only one of the two is inert.
+plugins:
+  - jekyll-3rd-party-libraries
+  - jekyll-cache-bust
+  - jekyll-email-protect
+  - jekyll-imagemagick
+  - jekyll-link-attributes
+  - jekyll-minifier
+  - jekyll-regex-replace
+  - jekyll/scholar
+  - jekyll-sitemap
+  - jekyll-socials
+  - jekyll-terser
+  - jekyll-toc
+  - jemoji
+
+  # al-folio plugins
+  - al_folio_core
+  - al_icons
+  - al_folio_cv
+  - al_citations
+  - al_img_tools
+  - al_search
+
+# Sitemap settings
+defaults:
+  - scope:
+      path: "assets"
+    values:
+      sitemap: false
+
+sass:
+  style: compressed
+  sourcemap: never # main.css.map is 65 KB of build output only devtools would read
+
+# -----------------------------------------------------------------------------
+# Jekyll Minifier
+# -----------------------------------------------------------------------------
+
+jekyll-minifier:
+  compress_javascript: false # set to false since we are using terser as the js minifier
+  # CSS is already minified upstream (Tailwind build ships tailwind.css; main.scss is compiled
+  # with sass `style: compressed`). Re-minifying via cssminify2 mangles Tailwind v4 spacing
+  # tokens inside calc(), turning `var(--spacing)` into the invalid `var( -  - spacing)` and
+  # breaking every spacing/positioning utility (e.g. .fixed-top -> broken navbar). Disable it.
+  compress_css: false
+  # JS minification is delegated to jekyll-terser (compress_javascript above is false).
+  exclude: ["robots.txt"]
+
+# -----------------------------------------------------------------------------
+# Terser
+# -----------------------------------------------------------------------------
+
+terser:
+  compress:
+    drop_console: true
+
+# -----------------------------------------------------------------------------
+# Jekyll Scholar
+# -----------------------------------------------------------------------------
+
+scholar:
+  last_name: [Yu]
+  first_name: [Dahai, D.]
+
+  style: apa
+  locale: en
+
+  source: /_bibliography/
+  bibliography: papers.bib
+  bibliography_template: bib
+  # Note: the `latex` filter preprocesses math in the .bib and would then fight
+  # MathJax, so putting math in an abstract means revisiting both this list and
+  # the math setup below. See https://github.com/alshedivat/al-folio/issues/357.
+  bibtex_filters: [latex, smallcaps, superscript]
+
+  replace_strings: true
+  join_strings: true
+
+  details_dir: bibliography
+  details_link: Details
+
+  query: "@*"
+  group_by: year
+  group_order: descending
+
+# No `enable_publication_badges`: a badge needs a per-entry `altmetric`,
+# `dimensions` or `google_scholar_id` field and no entry in papers.bib has one,
+# so the flags rendered nothing while still loading the Altmetric and Dimensions
+# scripts on /publications/.
+
+# Hide these from the BibTeX popup: they are al-folio's own fields, not bibliography
+# data. Only the ones papers.bib actually uses are listed — add a field here when
+# you start using it, or it shows up in the popup.
+filtered_bibtex_keywords: [abbr, abstract, arxiv, bibtex_show, html, preview, selected]
+
+# Misleading name: this flag gates the whole left-hand column of a bibliography
+# entry, so turning it off also drops the venue badge from _data/venues.yml. Keep
+# it on even though no entry carries a `preview` thumbnail.
+enable_publication_thumbnails: true
+
+# Author list: the rest are revealed on click.
+max_author_limit: 6 # leave blank to always show all authors
+more_authors_animation_delay: 10 # more authors are revealed on click using animation; smaller delay means faster animation
+
+# -----------------------------------------------------------------------------
+# Jekyll Link Attributes
+# -----------------------------------------------------------------------------
+
+# These are the defaults
+external_links:
+  enabled: true
+  rel: external nofollow noopener
+  target: _blank
+  exclude:
+
+# -----------------------------------------------------------------------------
+# Responsive WebP Images
+# -----------------------------------------------------------------------------
+
+# MAKE SURE imagemagick is installed and on your PATH before enabling imagemagick. In a terminal, run:
+#   convert -version
+imagemagick:
+  enabled: true # enables responsive images for your site (recommended, see https://github.com/alshedivat/al-folio/issues/537)
+  widths:
+    - 480
+    - 800
+    - 1400
+  input_directories:
+    - assets/img/
+  input_formats:
+    - ".jpg"
+    - ".jpeg"
+    - ".png"
+    - ".tiff"
+    - ".gif"
+  output_formats:
+    webp: "-auto-orient -quality 85"
+
+# Lazy loading images
+#   If you enable lazy loading, all images will add the loading="lazy" attribute.
+#   This will make your site load faster, but it may not be supported in all browsers.
+#   You can also set loading="" to other values for specific images to override the default behavior.
+#   Options: "auto", "eager", "lazy"
+#   See https://web.dev/browser-level-image-lazy-loading/ for more information.
+lazy_loading_images: true # enables lazy loading of images (recommended)
+
+# -----------------------------------------------------------------------------
+# Optional Features
+# -----------------------------------------------------------------------------
+
+# No math anywhere in the content (no `$`/`$$` in _pages, _news, or papers.bib),
+# so MathJax is not loaded at all: `al_math` is out of `plugins`/`Gemfile` and the
+# `mathjax` entry is out of `third_party_libraries`. To write math again, restore
+# all three and add `enable_math: true` here.
+enable_darkmode: true # enables switching between light/dark modes
+enable_navbar_social: true # social links on the left of the navbar (about page)
+enable_medium_zoom: true # enables image zoom feature (as on medium.com)
+enable_progressbar: true # enables a horizontal progress bar linked to the vertical scroll position
+
+# -----------------------------------------------------------------------------
+# Library versions
+# -----------------------------------------------------------------------------
+
+# CDN libraries this site actually loads, with the SRI hash the theme puts in the
+# `integrity` attribute. Upstream ships ~26 entries; the rest were removed because
+# nothing here can request them — each is gated either on a page flag no page sets
+# (`page.map` -> leaflet, `page.code_diff` -> highlightjs/diff2html,
+# `page.pretty_table` -> bootstrap-table, `page.pseudocode`, `page.tikzjax`,
+# `enable_masonry`) or on a plugin that is not in `plugins` above (`al_charts` ->
+# chartjs/echarts/plotly/vega*/mermaid/d3, `al_cookie` -> vanilla-cookieconsent,
+# `al_math` -> mathjax). Adding one of those features back means restoring its
+# entry here too.
+third_party_libraries:
+  download: false # if true, download the versions of the libraries specified below and use the downloaded files
+  fontawesome:
+    integrity:
+      css: "sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c="
+    url:
+      css: "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@{{version}}/css/all.min.css"
+    version: "7.2.0"
+  academicons:
+    integrity:
+      css: "sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw="
+    url:
+      css: "https://cdn.jsdelivr.net/npm/academicons@{{version}}/css/academicons.min.css"
+    version: "1.9.5"
+  google_fonts:
+    url:
+      fonts: "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&display=swap"
+  tocbot:
+    integrity:
+      css: "sha256-zTN0r+0OKaIv2xqeNNIYxNk0pWJ6+IqPGc1iDgVzWF0="
+      js: "sha256-lo/r+jQ81wWrxdIiiiEEd538z4+dTJTt+leOuAS7GCw="
+    url:
+      css: "https://cdn.jsdelivr.net/npm/tocbot@{{version}}/dist/tocbot.css"
+      js: "https://cdn.jsdelivr.net/npm/tocbot@{{version}}/dist/tocbot.min.js"
+    version: "4.36.4"
+  scholar-icons:
+    integrity:
+      css: "sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY="
+    url:
+      css: "https://cdn.jsdelivr.net/npm/scholar-icons@{{version}}/css/scholar-icons.css"
+    version: "1.0.3"
+  vanilla-back-to-top:
+    integrity:
+      js: "sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg="
+    url:
+      js: "https://cdn.jsdelivr.net/npm/vanilla-back-to-top@{{version}}/dist/vanilla-back-to-top.min.js"
+    version: "7.2.1"

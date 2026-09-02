@@ -1,0 +1,67 @@
+/*******************************************************************************
+ * Local styles.
+ *
+ * LOCAL PARTIAL (not a gem file): loaded last by assets/css/main.scss, so these
+ * declarations win over the same ones in al_folio_core/_sass/_themes.scss at
+ * equal specificity. The selectors must match the gem's exactly -- `:root` for
+ * light mode and `html[data-theme="dark"]` for dark.
+ *
+ * The stock theme is magenta (#b509ac) in light mode and cyan (#2698ba) in dark.
+ * These two colours are what `--global-theme-color` / `--global-hover-color`
+ * feed: links, venue badges, author underlines, the scroll progress bar, the
+ * back-to-top button and every hover state.
+ *
+ * Contrast, for reference (the venue badges in _data/venues.yml sit at ~5:1):
+ *   #782f40 on white          9.2:1
+ *   #c96a80 on the dark bg    4.8:1   (stock cyan: 5.1:1)
+ *   white on #c96a80          3.6:1   (stock cyan: 3.3:1)
+ ******************************************************************************/
+
+:root {
+  --global-theme-color: #782f40; // FSU garnet
+  --global-hover-color: #782f40;
+  // _variables.scss derives this as rgba($purple-color, 0.05); keep it in family.
+  --global-code-bg-color: rgba(120, 47, 64, 0.05);
+}
+
+html[data-theme="dark"] {
+  --global-theme-color: #c96a80; // the same garnet, lightened for a dark background
+  --global-hover-color: #c96a80;
+}
+
+
+/* -----------------------------------------------------------------------------
+ * Dark mode: the bibliography filter box.
+ *
+ * al_folio_core styles `.bibsearch-form-input` with the *newsletter* tokens, and
+ * in dark mode those are deliberately inverted (`--global-newsletter-bg-color` is
+ * $grey-color-light, i.e. a light card on a dark page). A newsletter block is
+ * meant to look like that; this site has no newsletter, so the only thing that
+ * inherited the inversion was the filter box on /publications/, which came out as
+ * a glaring white rectangle. Point it at the page's own colours instead.
+ * -------------------------------------------------------------------------- */
+
+html[data-theme="dark"] .bibsearch-form-input {
+  color: var(--global-text-color);
+  background: var(--global-bg-color);
+  border-color: var(--global-divider-color);
+}
+
+/* -----------------------------------------------------------------------------
+ * The site author's own name in a bibliography author list.
+ *
+ * bib.liquid wraps it in <em> (jekyll-scholar matches `scholar.last_name` /
+ * `first_name` in _config.yml) and the gem gives that a thin solid underline,
+ * which reads as just another link next to the dashed coauthor links. Every
+ * academic homepage this one sits next to bolds the name instead -- that is what
+ * a reader scans an author list for. Bold, and drop the underline so the two
+ * signals do not stack.
+ * -------------------------------------------------------------------------- */
+
+/* The gem's rule is `.publications ol.bibliography li .author > em`, so a bare
+ * `.author > em` loses to it on specificity -- the weight would apply and the
+ * border would not. Match the full selector. */
+.publications ol.bibliography li .author > em {
+  font-weight: 700;
+  border-bottom: none;
+}

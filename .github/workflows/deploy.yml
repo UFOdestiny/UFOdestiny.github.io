@@ -1,0 +1,58 @@
+name: Deploy site
+
+# Publishes straight to GitHub Pages via Pages' own deployment API — no gh-pages
+# branch. Pages must be set to Settings -> Pages -> Source: "GitHub Actions".
+# (Pages cannot build this site itself: it only whitelists the github-pages gem's
+# plugins, and this site uses jekyll-scholar and the al_folio_* gems.)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      # 4.0 to match the Ruby that wrote Gemfile.lock (BUNDLED WITH 4.0.6):
+      # an older Ruby ships an older RubyGems that does not understand the
+      # libc-qualified platform names in the lockfile's PLATFORMS section.
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "4.0"
+          bundler-cache: true
+
+      - name: Install ImageMagick
+        run: sudo apt-get update && sudo apt-get install -y imagemagick
+
+      - name: Build
+        run: JEKYLL_ENV=production bundle exec jekyll build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

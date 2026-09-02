@@ -1,0 +1,42 @@
+# Coauthor homepages, linked automatically from the publications page.
+# Key is the lowercased last name; `firstname` lists the variants used in the .bib.
+# Only add URLs you have actually checked — a stale link is worse than no link.
+# Note: `max_author_limit` in _config.yml means only the first authors are shown
+# until the reader clicks, so the early authors matter most here.
+"wang":
+  - firstname: ["Guang"]
+    url: https://guangwang.me/
+
+"hua":
+  - firstname: ["Bolin"]
+    url: https://www.im.pku.edu.cn/
+
+"jiang":
+  - firstname: ["Lin"]
+    url: https://linjiang18.github.io/
+
+"zhuang":
+  - firstname: ["Dingyi"]
+    url: https://zhuangdingyi.github.io/
+
+"bu":
+  - firstname: ["Yuheng"]
+    url: https://buyuheng.github.io/
+
+"tian":
+  - firstname: ["Yuan"]
+    url: https://samueli.ucla.edu/people/yuan-tian/
+
+"ye":
+  - firstname: ["Xinyue"]
+    url: https://geography.ua.edu/people/xinyue-ye
+
+"zhang":
+  - firstname: ["Desheng"]
+    url: https://www.cs.rutgers.edu/~dz220/
+  - firstname: ["Guannan"]
+    url: https://www.ornl.gov/staff-profile/guannan-zhang
+
+"bao":
+  - firstname: ["Feng"]
+    url: https://www.math.fsu.edu/~bao/

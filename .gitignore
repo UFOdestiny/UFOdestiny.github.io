@@ -1,0 +1,16 @@
+_site
+.bundle
+.jekyll-cache
+.jekyll-metadata
+.sass-cache
+vendor
+
+# `third_party_libraries.download: true` mirrors the CDN libraries here
+assets/libs/
+
+# `bundle update` may leave a report behind (al_folio_upgrade)
+al-folio-upgrade-report.md
+
+.DS_store
+.idea
+.ruby-version

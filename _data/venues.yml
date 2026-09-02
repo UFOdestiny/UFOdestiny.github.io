@@ -1,0 +1,36 @@
+# Colors and links for the `abbr` badge on each bibliography entry.
+"AAAI":
+  url: https://aaai.org/conference/aaai/
+  color: "#1f6feb"
+
+"IJCAI":
+  url: https://www.ijcai.org/
+  color: "#0b7285"
+
+"KDD":
+  url: https://kdd.org/
+  color: "#b8500a"
+
+"SIGSPATIAL":
+  url: https://sigspatial.acm.org/
+  color: "#2f7a3f"
+
+"IMWUT":
+  url: https://dl.acm.org/journal/imwut
+  color: "#8250df"
+
+"EEKE":
+  url: https://eeke-workshop.github.io/
+  color: "#6a7078"
+
+"Manage. Sci.":
+  url: https://pubsonline.informs.org/journal/mnsc
+  color: "#7a5a1f"
+
+# Not a venue, but the same badge slot: every entry without a DOI is on arXiv, and
+# `note` carries the status line ("Submitted to AAAI 2027."). The old grey was
+# #9aa1a9, which put white badge text at 2.6:1 -- the only colour here below the
+# ~5:1 the others sit at, and it read as a disabled badge.
+"arXiv":
+  url: https://arxiv.org/
+  color: "#556680"

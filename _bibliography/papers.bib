@@ -1,0 +1,498 @@
+---
+---
+
+@string{aaai = {AAAI Conference on Artificial Intelligence}}
+@string{ijcai = {International Joint Conference on Artificial Intelligence}}
+@string{kdd = {ACM SIGKDD Conference on Knowledge Discovery and Data Mining}}
+@string{sigspatial = {ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems}}
+@string{imwut = {Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies}}
+@string{eeke = {Workshop on Extraction and Evaluation of Knowledge Entities from Scientific Documents (EEKE @ JCDL)}}
+@string{mansci = {Management Science}}
+
+% Conventions used here:
+%   selected = {true}   -> also featured on the home page
+%   abbr                -> venue badge; the colour comes from _data/venues.yml
+%   arxiv               -> preprint of a published paper; do NOT add a second
+%                          entry for the preprint, it would duplicate the paper
+%   note                -> rendered as a second line under the venue
+%
+% Entries with no doi/html/arxiv are under review; their only source is
+% assets/pdf/dahai_yu_cv.pdf, which is the authority for status lines.
+
+@inproceedings{yu2026trustenergy,
+  abbr        = {AAAI},
+  preview     = {trustenergy.png},
+  bibtex_show = {true},
+  selected    = {true},
+  title       = {TrustEnergy: A Unified Framework for Accurate and Reliable User-level Energy Usage Prediction},
+  author      = {Yu, Dahai and Xu, Rongchao and Zhuang, Dingyi and Bu, Yuheng and Wang, Shenhao and Wang, Guang},
+  booktitle   = aaai,
+  volume      = {40},
+  number      = {46},
+  pages       = {39558--39566},
+  year        = {2026},
+  doi         = {10.1609/aaai.v40i46.41307},
+  html        = {https://ojs.aaai.org/index.php/AAAI/article/view/41307},
+  arxiv       = {2601.13422},
+  abstract    = {Energy usage prediction is important for various real-world applications, including grid management,
+                 infrastructure planning, and disaster response. Although a plethora of deep
+                 learning approaches have been proposed to perform this task, most of them either
+                 overlook the essential spatial correlations across households or fail to scale to
+                 individualized prediction, making them less effective for accurate fine-grained
+                 user-level prediction. In addition, due to the dynamic and uncertain nature of
+                 energy usage caused by various factors such as extreme weather events, quantifying
+                 uncertainty for reliable prediction is also significant, but it has not been fully
+                 explored in existing work. In this paper, we propose a unified framework called
+                 TrustEnergy for accurate and reliable user-level energy usage prediction. There are
+                 two key technical components in TrustEnergy, (i) a Hierarchical Spatiotemporal
+                 Representation module to efficiently capture both macro and micro energy usage
+                 patterns with a novel memory-augmented spatiotemporal graph neural network, and
+                 (ii) an innovative Sequential Conformalized Quantile Regression module to
+                 dynamically adjust uncertainty bounds to ensure valid prediction intervals over
+                 time, without making strong assumptions about the underlying data distribution. We
+                 implement and evaluate our TrustEnergy framework by working with an electricity
+                 provider in Florida, and the results show our TrustEnergy can achieve a 5.4%
+                 increase in prediction accuracy and 5.7% improvement in uncertainty quantification
+                 compared to state-of-the-art baselines.}
+}
+
+@inproceedings{yu2026energymamba,
+  abbr        = {KDD},
+  preview     = {energymamba.png},
+  bibtex_show = {true},
+  selected    = {true},
+  title       = {EnergyMamba: An Uncertainty-Aware Graph-Enhanced Selective State Space Model for Energy Consumption Prediction},
+  author      = {Yu, Dahai and Xu, Rongchao and Jiang, Lin and Wang, Guang},
+  booktitle   = kdd,
+  pages       = {12727--12738},
+  year        = {2026},
+  doi         = {10.1145/3770855.3818841},
+  html        = {https://dl.acm.org/doi/10.1145/3770855.3818841},
+  arxiv       = {2606.00506},
+  note        = {AI for Science (AI4S) Workshop},
+  abstract    = {Energy consumption prediction is essential for efficient grid management, demand-side optimization,
+                 and sustainable energy planning. Although advanced machine learning methods have
+                 been employed for better prediction performance, existing works have two key
+                 limitations: (1) they usually formulate this task as a purely time-series
+                 prediction problem without explicitly modeling the spatial dependencies among
+                 different regions, and (2) they fail to provide reliable predictions with
+                 uncertainty estimates under abnormal situations such as extreme weather events. To
+                 advance existing research, we propose EnergyMamba, an uncertainty-aware
+                 spatiotemporal learning framework for accurate and reliable energy consumption
+                 prediction, which comprises two key components: (i) a novel Graph-Enhanced
+                 Selective State Space Model (GE-Mamba) that injects spatial context learned from
+                 the grid topology into the temporal dynamics, enabling coupled spatiotemporal
+                 modeling, and (ii) an Adaptive Sequential Conformalized Quantile Regression (AS-
+                 CQR) module, which includes locally adaptive normalization and an online feedback
+                 mechanism to dynamically calibrate prediction intervals under potential
+                 distribution shifts. We evaluate EnergyMamba on four large-scale real-world
+                 datasets from Florida, New York, and California. Results show EnergyMamba achieves
+                 around 5% improvement in prediction accuracy and 6% improvement in uncertainty
+                 quantification over 15 state-of-the-art baselines.}
+}
+
+@article{yu2026healthmamba,
+  abbr        = {IJCAI},
+  preview     = {healthmamba.png},
+  bibtex_show = {true},
+  selected    = {true},
+  title       = {HealthMamba: An Uncertainty-aware Spatiotemporal Graph State Space Model for Effective and Reliable Healthcare Facility Visit Prediction},
+  author      = {Yu, Dahai and Jiang, Lin and Xu, Rongchao and Wang, Guang},
+  journal     = ijcai,
+  year        = {2026},
+  note        = {To appear.},
+  arxiv       = {2602.05286},
+  abstract    = {Healthcare facility visit prediction is essential for optimizing healthcare resource allocation and
+                 informing public health policy. Despite advanced machine learning methods being
+                 employed for better prediction performance, existing works usually formulate this
+                 task as a time-series forecasting problem without considering the intrinsic spatial
+                 dependencies of different types of healthcare facilities, and they also fail to
+                 provide reliable predictions under abnormal situations such as public emergencies.
+                 To advance existing research, we propose HealthMamba, an uncertainty-aware
+                 spatiotemporal framework for accurate and reliable healthcare facility visit
+                 prediction. HealthMamba comprises three key components: (i) a Unified
+                 Spatiotemporal Context Encoder that fuses heterogeneous static and dynamic
+                 information, (ii) a novel Graph State Space Model called GraphMamba for
+                 hierarchical spatiotemporal modeling, and (iii) a comprehensive uncertainty
+                 quantification module integrating three uncertainty quantification mechanisms for
+                 reliable prediction. We evaluate HealthMamba on four large-scale real-world
+                 datasets from California, New York, Texas, and Florida. Results show HealthMamba
+                 achieves around 6.0% improvement in prediction accuracy and 3.5% improvement in
+                 uncertainty quantification over state-of-the-art baselines.}
+}
+
+@article{xu2026synhat,
+  abbr        = {IMWUT},
+  preview     = {synhat.png},
+  bibtex_show = {true},
+  selected    = {true},
+  title       = {SynHAT: A Two-stage Coarse-to-Fine Diffusion Framework for Synthesizing Human Activity Traces},
+  author      = {Xu, Rongchao and Jiang, Lin and Yu, Dahai and Li, Ximiao and Wang, Guang},
+  journal     = imwut,
+  volume      = {10},
+  number      = {2},
+  pages       = {69:1--69:35},
+  year        = {2026},
+  doi         = {10.1145/3810213},
+  html        = {https://dl.acm.org/doi/10.1145/3810213},
+  arxiv       = {2604.14705},
+  note        = {Presented at ACM UbiComp 2026},
+  abstract    = {Human activity traces (HATs) are critical for many applications, including human mobility modeling
+                 and point-of-interest (POI) recommendation. However, growing privacy concerns have
+                 severely limited access to authentic large-scale HAT datasets. Recent advances in
+                 generative AI provide new opportunities to synthesize realistic and privacy-
+                 preserving HATs for such applications. Yet two major challenges remain: (i) HATs
+                 are highly irregular and dynamic, with long and varying time intervals, making it
+                 difficult to capture their complex spatio-temporal dependencies and underlying
+                 distributions; and (ii) generative models are often computationally expensive,
+                 making long-term, fine-grained HAT synthesis inefficient. To address these
+                 challenges, we propose SynHAT, a computationally efficient coarse-to-fine HAT
+                 synthesis framework built on a novel spatio-temporal denoising diffusion model. In
+                 Stage 1, we develop Coarse-HADiff, which models the overall spatio-temporal
+                 dependencies of coarse-grained latent spatio-temporal traces. It incorporates a
+                 novel Latent Spatio-Temporal U-Net with dual Drift-Jitter branches to jointly model
+                 smooth spatial transitions and temporal variations during denoising. In Stage 2, we
+                 introduce a three-step pipeline consisting of Behavior Pattern Extraction, Fine-
+                 HADiff, which shares the same architecture as Coarse-HADiff, and Semantic Alignment
+                 to generate fine-grained latent spatio-temporal traces from the Stage 1 outputs. We
+                 extensively evaluate SynHAT in terms of data fidelity, utility, privacy,
+                 robustness, and scalability. Experiments on real-world HAT datasets from four
+                 cities across three countries show that SynHAT substantially outperforms state-of-
+                 the-art baselines, achieving 52% and 33% improvements on spatial and temporal
+                 metrics, respectively.}
+}
+
+@article{yu2026trac,
+  abbr        = {arXiv},
+  preview     = {trac.png},
+  bibtex_show = {true},
+  title       = {TrAC: Trace-Conditioned Answer Consistency for Efficient Uncertainty Quantification in LLMs},
+  author      = {Yu, Dahai and Jiang, Lin and Xu, Rongchao and Wang, Guang},
+  journal     = {arXiv preprint arXiv:2608.00422},
+  year        = {2026},
+  arxiv       = {2608.00422},
+  note        = {Submitted to ACM SIGKDD 2027.},
+  abstract    = {Large language models (LLMs) can generate fluent reasoning traces that nevertheless lead to
+                 incorrect answers, making response-level uncertainty estimation important for
+                 abstention, human review, and adaptive compute allocation. Existing approaches
+                 generally fall into three categories: passive single-trace methods use token-level
+                 confidence signals, sampling-based methods compare multiple complete traces at
+                 higher generation cost, and active prefix-based methods probe partial traces to
+                 study answer stabilization or preference transitions. However, none actively re-
+                 elicits an answer from a completed reasoning trace to measure its consistency with
+                 and support for the original answer. To address this gap, we introduce Trace-
+                 Conditioned Answer Consistency (TrAC), a correctness-supervised uncertainty
+                 quantification framework that combines active and passive signals anchored to one
+                 completed reasoning trace. Its active component, Prefix-Conditioned Elicitation
+                 (PCE), re-elicits a short answer conditioned on the completed trace and represents
+                 both its consistency with the original answer and its token-level probabilistic
+                 support. Its passive component, Trace Uncertainty Profile (TUP), summarizes how
+                 token-level uncertainty evolves throughout the original generation without
+                 additional decoding. A lightweight head then integrates the two representations
+                 into a response-correctness score. Across five mathematical reasoning benchmarks
+                 and three LLM families, TrAC improves macro AUROC by 1.8% and reduces AURC by 3.4%
+                 relative to eight-sample self-consistency, while using one complete reasoning trace
+                 and a short cached answer probe. When eight samples are already available,
+                 augmenting sample consensus with re-elicitation further improves macro AUROC by
+                 4.3% and reduces AURC by 8.3%, without additional full-trace generation.}
+}
+
+@article{yu2026symbouq,
+  abbr        = {arXiv},
+  preview     = {symbouq.png},
+  bibtex_show = {true},
+  title       = {SymboUQ: Symbolic Uncertainty Quantification for Spatial Reasoning in LLMs},
+  author      = {Yu, Dahai and Jiang, Lin and Xu, Rongchao and Wang, Guang},
+  journal     = {arXiv preprint arXiv:2608.00417},
+  year        = {2026},
+  arxiv       = {2608.00417},
+  note        = {Submitted to AAAI 2027.},
+  abstract    = {Although large language models (LLMs) can produce fluent spatial reasoning traces, their
+                 intermediate relations may fail to support the final conclusion, making token-level
+                 confidence insufficient for final-answer reliability estimation. Existing formal
+                 verifiers provide stronger semantic evidence, but their applicability is partial: a
+                 parsed claim need not yield a definite semantic verdict. To address this issue, we
+                 introduce SymboUQ, a symbolic uncertainty quantification framework that estimates
+                 final-answer reliability from reasoning traces by distinguishing symbolizability,
+                 whether a claim can be represented in the verifier's formal language, from semantic
+                 determinacy, whether its execution yields an entailed or contradicted verdict
+                 rather than an unknown or not-evaluable outcome. SymboUQ comprises (i) a Layout
+                 Auditor that executes ordered spatial claims and extracts feasibility, conflict,
+                 and repair evidence; (ii) a label-free Determinacy Profile that characterizes
+                 effective executable coverage; and (iii) a Determinacy-Aware Reliability Composer
+                 that integrates constraint-based, representation-based, and decoding-based scores
+                 according to verifier applicability. Extensive experiments on five spatial
+                 reasoning benchmarks with four frozen LLM backbones show that SymboUQ achieves
+                 approximately an 8% relative improvement in AUROC and a 7% relative reduction in
+                 class-balanced Brier loss over the strongest baseline.}
+}
+
+@article{jiang2026synenergy,
+  abbr        = {arXiv},
+  preview     = {synenergy.png},
+  bibtex_show = {true},
+  title       = {SynEnergy: Anomaly Semantic-Guided Diffusion for Synthetic Energy Data Generation},
+  author      = {Jiang, Lin and Yu, Dahai and Gelli, Ravikumar and Wang, Guang},
+  journal     = {arXiv preprint arXiv:2608.03087},
+  year        = {2026},
+  arxiv       = {2608.03087},
+  abstract    = {Fine-grained energy consumption data are essential for applications such as demand forecasting,
+                 demand response planning, and grid reliability assessment. However, access to such
+                 data is often restricted by privacy concerns and data-sharing constraints,
+                 motivating growing interest in synthetic energy data generation. Although existing
+                 methods can reproduce overall consumption distributions and recurring temporal
+                 patterns, they often smooth out or underrepresent anomalous events caused by
+                 extreme weather, infrastructure failures, and behavioral shifts. Preserving these
+                 events is challenging because they are sparse, localized in time and space, and
+                 shaped by heterogeneous dependencies across geographical proximity and regional
+                 attributes. To address these challenges, we propose SynEnergy, a two-stage
+                 diffusion-based framework for anomaly-preserving energy consumption data
+                 generation. The first stage, Heterogeneous Graph-based Anomaly Semantic Learning
+                 (HG-ASL), extracts region-specific anomaly semantics from sparse residual
+                 structures by jointly modeling spatial and attribute dependencies across urban
+                 regions. The second stage, Anomaly Semantic-guided Diffusion (AS-Diff), injects the
+                 learned anomaly semantics into the denoising process to generate realistic
+                 consumption sequences while preserving anomalous patterns. This design enables
+                 controllable generation for individual regions and scales naturally to city-wide
+                 settings. We evaluate SynEnergy on four real-world energy consumption datasets
+                 against 11 general-purpose and energy-specific generation baselines. Experimental
+                 results show that SynEnergy improves anomaly preservation fidelity by an average of
+                 12.21% and downstream quality by 2.96%, while maintaining competitive overall
+                 generation fidelity compared to baselines.}
+}
+
+@article{xu2026mbdiff,
+  abbr        = {arXiv},
+  preview     = {mbdiff.png},
+  bibtex_show = {true},
+  title       = {MBDiff: Multi-view Behavior-aware Diffusion Model for Probabilistic Utility Data Imputation},
+  author      = {Xu, Rongchao and Jiang, Lin and Yu, Dahai and Li, Ximiao and Wang, Guang},
+  journal     = {arXiv preprint arXiv:2607.29177},
+  year        = {2026},
+  arxiv       = {2607.29177},
+  abstract    = {Utility data (e.g., electricity, water, and gas consumption), collected by ubiquitous sensors and
+                 embedded devices, often contains substantial missing values due to various factors
+                 such as device failures and data transmission issues. The data missingness can
+                 severely impact utility billing accuracy, hinder demand forecasting, and disrupt
+                 efficient utility supply management. As a result, utility data imputation has
+                 attracted much interest from both industry and academia. While many studies have
+                 attempted to address this issue, most of them rely on aggregated datasets for
+                 training, overlooking rich user behavior information, which could provide valuable
+                 insights for more accurate imputation. However, learning comprehensive user
+                 behavior from long-term, diverse, and incomplete utility data remains a significant
+                 challenge. Moreover, leveraging user behavior information to guide imputation is
+                 nontrivial due to the indirect nature of the correlations. To address these
+                 challenges, we propose MBDiff, a Multi-view Behavior-aware Diffusion Model for
+                 Probabilistic Utility Data Imputation. MBDiff incorporates two key technical
+                 components: (i) a multi-view User Behavior Extraction module that learns
+                 comprehensive user behavior from multiple perspectives, including global, local,
+                 and instance-level views; and (ii) a behavior-aware conditional diffusion model
+                 consisting of a reference selection module and a conditional attentional denoising
+                 network to impute utility data in a computationally efficient manner. We implement
+                 and evaluate MBDiff by collaborating with one of the largest municipal utility
+                 providers in Florida. Experimental results demonstrate our proposed MBDiff
+                 effectively outperforms state-of-the-art baselines, e.g., it improves 7.04% and
+                 29.1% on the electricity and water usage datasets for block missingness imputation,
+                 respectively.}
+}
+
+@article{xu2026mobidiff,
+  abbr        = {arXiv},
+  preview     = {mobidiff.png},
+  bibtex_show = {true},
+  title       = {MobiDiff: Semantic-Aware Multi-Channel Discrete Diffusion for Human Mobility Data Generation},
+  author      = {Xu, Rongchao and Jiang, Lin and Yu, Dahai and Li, Ximiao and Liu, Taichi and Zhang, Desheng and Tian, Yuan and Wang, Guang},
+  journal     = {arXiv preprint arXiv:2607.08357},
+  year        = {2026},
+  arxiv       = {2607.08357},
+  abstract    = {Human mobility data are essential for transportation optimization, urban planning, and resource
+                 allocation, yet real-world mobility data are costly to collect and difficult to
+                 share due to privacy concerns. Recent diffusion-based methods have shown promise in
+                 synthesizing realistic mobility patterns, but they typically rely on continuous or
+                 latent spatio-temporal traces, limiting their ability to natively model discrete
+                 semantic events with explicit region, activity, time, and interval structures. To
+                 address this issue, we introduce MobiDiff, an end-to-end discrete diffusion
+                 framework that efficiently generates mobility data by directly denoising multi-
+                 channel semantic skeletons, avoiding the costly interpolation, latent trace
+                 construction, and coarse-to-fine realization pipelines widely used in existing
+                 diffusion-based methods. Specifically, MobiDiff decomposes each human check-in
+                 event into spatial, activity, and temporal channels, and employs structured event-,
+                 group-, and channel-level masking to jointly capture trajectory-level mobility
+                 patterns and within-event dependencies. We evaluate generation fidelity, privacy-
+                 preserving, and efficiency on three large-scale real-world datasets from Atlanta,
+                 Boston, and Seattle. Results show that MobiDiff effectively preserves trajectory
+                 length and temporal interval distributions while remaining competitive across
+                 broader mobility statistics; it is also much faster than state-of-the-art methods,
+                 e.g., 5.3x faster than GeoGen on average during inference. These findings suggest
+                 that discrete diffusion offers an interpretable and efficient framework for
+                 synthetic mobility data generation.}
+}
+
+@article{jiang2026e4gen,
+  abbr        = {arXiv},
+  preview     = {e4gen.png},
+  bibtex_show = {true},
+  title       = {E4GEN: Event-level Explainable Extreme-Enhanced Time-series Generation},
+  author      = {Jiang, Lin and Yu, Dahai and Li, Ximiao and Wang, Guang},
+  journal     = {arXiv preprint arXiv:2606.01634},
+  year        = {2026},
+  arxiv       = {2606.01634},
+  abstract    = {Generating realistic time series is essential for scientific research and real-world applications.
+                 However, existing methods often emphasize overall distributional fidelity while
+                 failing to faithfully capture extreme events. To advance existing research, we
+                 propose E4GEN, an explainable diffusion framework for extreme event-aware time-
+                 series generation. E4GEN provides systematic insights into when, what, and how to
+                 control extreme-event generation through three key components. First, E-Activator
+                 learns the dataset-adaptive extreme-control signal activation step during the
+                 denoising process without interfering with regular temporal components, including
+                 trend and seasonality. Second, E-Predictor determines what control signal to
+                 enforce through Self-Driven Semantic Prediction, where each sample derives its own
+                 control signal by inferring latent extreme-event information during generation. It
+                 also includes a novel Data-Conditioned Training, Noise-Initiated Sampling mechanism
+                 to address the issue of unavailable training labels. Third, E-Control specifies how
+                 to control extreme-event generation through a trainable Extreme Control Network,
+                 which transforms the semantic control signal into layer-wise signals and injects it
+                 into the denoising process. We evaluate E4GEN on six datasets with 17 metrics, and
+                 extensive experiments show that E4GEN outperforms state-of-the-art models across
+                 multiple dimensions, including overall fidelity, extreme-event fidelity, and
+                 downstream utility.}
+}
+
+@article{hu2026ensf,
+  abbr        = {arXiv},
+  preview     = {ensf.png},
+  bibtex_show = {true},
+  title       = {Diffusion Model-Based Data Assimilation for Real-World Energy Consumption Forecasting},
+  author      = {Hu, Ruoyu and Yu, Dahai and Bao, Feng and Wang, Guang and Zhang, Guannan},
+  journal     = {arXiv preprint arXiv:2605.29072},
+  year        = {2026},
+  arxiv       = {2605.29072},
+  abstract    = {Accurate estimation and forecasting of energy consumption are important for power-system operation,
+                 planning, and demand-side management. In practice, however, complete and timely
+                 measurements may not always be available, and the observed data can be partial,
+                 noisy, or delayed. This motivates the use of learned forecasting models for
+                 predicting the evolving consumption state, together with data assimilation methods
+                 for sequential forecast correction. In this work, we study a high-dimensional data
+                 assimilation problem for real energy-consumption data. The forward prediction is
+                 supplied by a pretrained black-box spatio-temporal forecasting model, which is
+                 treated as the state propagator in the filtering procedure. We employ the Ensemble
+                 Score Filter (EnSF) to assimilate partial and noisy observations and to correct the
+                 forecast trajectory over time. The EnSF uses score-based diffusion models to
+                 approximate filtering distributions and avoids retraining neural-network score
+                 models during assimilation by using a closed-form score representation and Monte
+                 Carlo approximation. Numerical experiments demonstrate that open-loop propagation
+                 of the learned forecasting model can become unreliable over long horizons, while
+                 EnSF-based correction substantially improves state estimation. Comparisons with the
+                 Ensemble Kalman Filter (EnKF) further show that EnSF provides stronger correction
+                 under the nonlinear observation setting considered in this work.}
+}
+
+% Under minor revision, so there is no DOI, no publisher page, and no preprint to
+% link. `year` is the revision round, not a publication year. The CV PDF writes the
+% first author as "Leng Yan"; read the same way as its other names, that is
+% given name Leng, family name Yan.
+@article{yan2026fusiontransnet,
+  abbr        = {Manage. Sci.},
+  bibtex_show = {true},
+  title       = {FusionTransNet for Smart Urban Mobility: Spatiotemporal Traffic Forecasting Through Multimodal Network Integration},
+  author      = {Yan, Leng and Sang, Yunxin and Yu, Dahai and Wang, Binwu and Wang, Guang},
+  journal     = mansci,
+  year        = {2026},
+  note        = {Under minor revision.}
+}
+
+@inproceedings{yu2025uqgnn,
+  abbr        = {SIGSPATIAL},
+  preview     = {uqgnn.png},
+  bibtex_show = {true},
+  selected    = {true},
+  title       = {UQGNN: Uncertainty Quantification of Graph Neural Networks for Multivariate Spatiotemporal Prediction},
+  author      = {Yu, Dahai and Zhuang, Dingyi and Jiang, Lin and Xu, Rongchao and Ye, Xinyue and Bu, Yuheng and Wang, Shenhao and Wang, Guang},
+  booktitle   = sigspatial,
+  pages       = {52--65},
+  year        = {2025},
+  doi         = {10.1145/3748636.3762709},
+  html        = {https://dl.acm.org/doi/10.1145/3748636.3762709},
+  arxiv       = {2508.08551},
+  abstract    = {Spatiotemporal prediction plays a critical role in numerous real-world applications such as urban
+                 planning, transportation optimization, disaster response, and pandemic control. In
+                 recent years, researchers have made significant progress by developing advanced
+                 deep learning models for spatiotemporal prediction. However, most existing models
+                 are deterministic, i.e., predicting only the expected mean values without
+                 quantifying uncertainty, leading to potentially unreliable and inaccurate outcomes.
+                 While recent studies have introduced probabilistic models to quantify uncertainty,
+                 they typically focus on a single phenomenon (e.g., taxi, bike, crime, or traffic
+                 crashes), thereby neglecting the inherent correlations among heterogeneous urban
+                 phenomena. To address the research gap, we propose a novel Graph Neural Network
+                 with Uncertainty Quantification, termed UQGNN for multivariate spatiotemporal
+                 prediction. UQGNN introduces two key innovations: (i) an Interaction-aware
+                 Spatiotemporal Embedding Module that integrates a multivariate diffusion graph
+                 convolutional network and an interaction-aware temporal convolutional network to
+                 effectively capture complex spatial and temporal interaction patterns, and (ii) a
+                 multivariate probabilistic prediction module designed to estimate both expected
+                 mean values and associated uncertainties. Extensive experiments on four real-world
+                 multivariate spatiotemporal datasets from Shenzhen, New York City, and Chicago
+                 demonstrate that UQGNN consistently outperforms state-of-the-art baselines in both
+                 prediction accuracy and uncertainty quantification. For example, on the Shenzhen
+                 dataset, UQGNN achieves a 5% improvement in both prediction accuracy and
+                 uncertainty quantification.}
+}
+
+@inproceedings{jiang2025epopr,
+  abbr        = {IJCAI},
+  preview     = {epopr.png},
+  bibtex_show = {true},
+  selected    = {true},
+  title       = {Uncertainty-aware Predict-Then-Optimize Framework for Equitable Post-Disaster Power Restoration},
+  author      = {Jiang, Lin and Yu, Dahai and Xu, Rongchao and Tang, Tian and Wang, Guang},
+  booktitle   = ijcai,
+  pages       = {9719--9727},
+  year        = {2025},
+  doi         = {10.24963/ijcai.2025/1080},
+  html        = {https://www.ijcai.org/proceedings/2025/1080},
+  arxiv       = {2508.04780},
+  note        = {AI and Social Good Track},
+  abstract    = {The increasing frequency of extreme weather events, such as hurricanes, highlights the urgent need
+                 for efficient and equitable power system restoration. Many electricity providers
+                 make restoration decisions primarily based on the volume of power restoration
+                 requests from each region. However, our data-driven analysis reveals significant
+                 disparities in request submission volume, as disadvantaged communities tend to
+                 submit fewer restoration requests. This disparity makes the current restoration
+                 solution inequitable, leaving these communities vulnerable to extended power
+                 outages. To address this, we aim to propose an equity-aware power restoration
+                 strategy that balances both restoration efficiency and equity across communities.
+                 However, achieving this goal is challenging for two reasons: the difficulty of
+                 predicting repair durations under dataset heteroscedasticity, and the tendency of
+                 reinforcement learning agents to favor low-uncertainty actions, which potentially
+                 undermine equity. To overcome these challenges, we design a predict-then-optimize
+                 framework called EPOPR with two key components: (1) Equity-Conformalized Quantile
+                 Regression for uncertainty-aware repair duration prediction, and (2) Spatial-
+                 Temporal Attentional RL that adapts to varying uncertainty levels across regions
+                 for equitable decision-making. Experimental results show that our EPOPR effectively
+                 reduces the average power outage duration by 3.60% and decreases inequity between
+                 different communities by 14.19% compared to state-of-the-art baselines.}
+}
+
+@inproceedings{yu2023citation,
+  abbr        = {EEKE},
+  preview     = {citation.png},
+  bibtex_show = {true},
+  title       = {Sentiment Classification of Scientific Citation Based on Modified BERT Attention by Sentiment Dictionary},
+  author      = {Yu, Dahai and Hua, Bolin},
+  booktitle   = eeke,
+  volume      = {3451},
+  year        = {2023},
+  html        = {https://ceur-ws.org/Vol-3451/paper10.pdf}
+}
+
+@inproceedings{chang2021keyword,
+  abbr        = {EEKE},
+  preview     = {keyword.png},
+  bibtex_show = {true},
+  title       = {Keyword Extraction and Technology Entity Extraction for Disruptive Technology Policy Texts},
+  author      = {Chang, Aofei and Hua, Bolin and Yu, Dahai},
+  booktitle   = eeke,
+  volume      = {3004},
+  year        = {2021},
+  html        = {https://ceur-ws.org/Vol-3004/paper5.pdf}
+}
