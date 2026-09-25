@@ -1,9 +1,6 @@
 name: Deploy site
 
-# Publishes straight to GitHub Pages via Pages' own deployment API — no gh-pages
-# branch. Pages must be set to Settings -> Pages -> Source: "GitHub Actions".
-# (Pages cannot build this site itself: it only whitelists the github-pages gem's
-# plugins, and this site uses jekyll-scholar and the al_folio_* gems.)
+# Publishes straight to GitHub Pages via Pages' own deployment API — no gh-pages branch. Pages must be set to Settings -> Pages -> Source: "GitHub Actions". (Pages cannot build this site itself: it only whitelists the github-pages gem's plugins, and this site uses jekyll-scholar and the al_folio_* gems.)
 
 on:
   push:
@@ -26,9 +23,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      # 4.0 to match the Ruby that wrote Gemfile.lock (BUNDLED WITH 4.0.6):
-      # an older Ruby ships an older RubyGems that does not understand the
-      # libc-qualified platform names in the lockfile's PLATFORMS section.
+      # 4.0 to match the Ruby that wrote Gemfile.lock (BUNDLED WITH 4.0.6): an older Ruby ships an older RubyGems that does not understand the libc-qualified platform names in the lockfile's PLATFORMS section.
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -43,10 +38,7 @@ jobs:
         with:
           python-version: "3.x"
 
-      # The same checks the Check workflow runs on a branch or a PR, repeated
-      # here because a push straight to main never goes through that workflow.
-      # Warnings do not fail a deploy (no `--strict`): the site is correct enough
-      # to publish, and a blocked deploy over a warning is worse than the warning.
+      # The same checks the Check workflow runs on a branch or a PR, repeated here because a push straight to main never goes through that workflow. Warnings do not fail a deploy (no `--strict`): the site is correct enough to publish, and a blocked deploy over a warning is worse than the warning.
       - name: Content checks
         run: |
           python3 -m pip install --quiet pyyaml

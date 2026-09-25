@@ -7,14 +7,12 @@
 @use "sass:math";
 @use "sass:string";
 
-/* Configure your design tokens BEFORE loading any of your partials.
-   Make sure `_sass/_variables.scss` declares `$max-content-width: 72rem !default;` */
+/* Configure your design tokens BEFORE loading any of your partials. Make sure `_sass/_variables.scss` declares `$max-content-width: 72rem !default;` */
 @use "variables" with (
   $max-content-width: {{ site.max_width | default:  "930px" }}
 );
 
-/* Your project partials — convert these files to `@use "variables";`
-   (or `@use "variables" as *;`) inside each file and qualify variables if needed. */
+/* Your project partials — convert these files to `@use "variables";` (or `@use "variables" as *;`) inside each file and qualify variables if needed. */
 @use "themes";
 @use "layout";
 
@@ -28,17 +26,9 @@
 @use "utilities";
 
 // Other specialized styles
-// Local change: the gem also `@use`s "tabs", "teachings" and "typograms" here.
-// This site has no tabs, courses or typograms (tabs.js and typograms.js are
-// pruned by _plugins/prune_theme_assets.rb), so their ~3.7 KB of CSS is dropped.
+// Local change: the gem also `@use`s "tabs", "teachings" and "typograms" here. This site has no tabs, courses or typograms (tabs.js and typograms.js are pruned by _plugins/prune_theme_assets.rb), so their ~3.7 KB of CSS is dropped.
 
 /* ---------------------------- local addition ------------------------------ *
- * Our own styles, loaded last so they win at equal specificity. This has to be
- * a partial of our own rather than a shadow of a gem partial:
- * shadowing `_sass/_variables.scss` does NOT work, because the gem's
- * `_themes.scss` says `@use "variables"`, and Dart Sass resolves that relative
- * to the importing file first -- so it always finds the gem's own copy, never
- * ours. Only partials `@use`d from THIS file (which lives outside the gem's
- * _sass/) fall through to the load path and can be shadowed.
+ * Our own styles, loaded last so they win at equal specificity. This has to be a partial of our own rather than a shadow of a gem partial: shadowing `_sass/_variables.scss` does NOT work, because the gem's `_themes.scss` says `@use "variables"`, and Dart Sass resolves that relative to the importing file first -- so it always finds the gem's own copy, never ours. Only partials `@use`d from THIS file (which lives outside the gem's _sass/) fall through to the load path and can be shadowed.
  * ------------------------------------------------------------------------- */
 @use "local";

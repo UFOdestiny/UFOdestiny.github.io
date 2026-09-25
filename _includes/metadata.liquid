@@ -36,21 +36,14 @@
     {% endif %}
   {% else %}
     {% comment %}
-      Local change: on the site root the gem emits the bare name. A search for
-      "dahai yu fsu" has nothing to match in that, so append `tagline` from
-      _config.yml when it is set. Other pages keep the gem's "Page | Name".
+      Local change: on the site root the gem emits the bare name. A search for "dahai yu fsu" has nothing to match in that, so append `tagline` from _config.yml when it is set. Other pages keep the gem's "Page | Name".
     {% endcomment %}
     {% if site.tagline %}{{ title }} — {{ site.tagline }}{% else %}{{ title }}{% endif %}
   {% endif %}
 </title>
 <meta name="author" content="{{ author_name }}">
 {% comment %}
-  Local addition: Google Search Console's site-verification tag. The token belongs
-  to one property + one verification method, so this is specifically the token from
-  a **URL prefix** property (https://ufodestiny.github.io/) verified by "HTML tag".
-  A "Domain" property cannot be used here at all: it only verifies by DNS TXT, and
-  the DNS for github.io is GitHub's, not ours. Set `google_site_verification` in
-  _config.yml; with the key absent this emits nothing.
+  Local addition: Google Search Console's site-verification tag. The token belongs to one property + one verification method, so this is specifically the token from a **URL prefix** property (https://ufodestiny.github.io/) verified by "HTML tag". A "Domain" property cannot be used here at all: it only verifies by DNS TXT, and the DNS for github.io is GitHub's, not ours. Set `google_site_verification` in _config.yml; with the key absent this emits nothing.
 {% endcomment %}
 {% if site.google_site_verification %}
   <meta name="google-site-verification" content="{{ site.google_site_verification }}">
@@ -87,13 +80,7 @@
 {% endif %}
 
 {% comment %}
-  Local change: the gem emits a "Twitter card" block right here — twitter:card,
-  twitter:title, twitter:description unconditionally, plus twitter:image and
-  twitter:site/creator when `og_image` / `x_username` are set. This site carries no
-  X/Twitter presence, so the whole block is removed rather than left half-filled.
-  Every consumer that mattered falls back to the OpenGraph tags above. Keep it
-  deleted when updating the theme; `x_username` is also absent from
-  _data/socials.yml, which is what keeps the icon and the search entry away.
+  Local change: the gem emits a "Twitter card" block right here — twitter:card, twitter:title, twitter:description unconditionally, plus twitter:image and twitter:site/creator when `og_image` / `x_username` are set. This site carries no X/Twitter presence, so the whole block is removed rather than left half-filled. Every consumer that mattered falls back to the OpenGraph tags above. Keep it deleted when updating the theme; `x_username` is also absent from _data/socials.yml, which is what keeps the icon and the search entry away.
 {% endcomment %}
 
 {% if site.serve_schema_org %}
@@ -233,8 +220,7 @@
         {% capture link %}{{ social[1] }}{% endcapture %}
         {% assign sameaslinks = sameaslinks | push: link %}
       {% comment %}
-        Local change: the gem's `x_username` case, which pushed a twitter.com URL
-        into the schema.org sameAs list, is removed along with the Twitter card above.
+        Local change: the gem's `x_username` case, which pushed a twitter.com URL into the schema.org sameAs list, is removed along with the Twitter card above.
       {% endcomment %}
       {% when 'youtube_id' %}
         {% capture link %}https://youtube.com/@{{ social[1] }}{% endcapture %}
@@ -244,9 +230,7 @@
         {% assign sameaslinks = sameaslinks | push: link %}
       {% else %}
         {% comment %}
-          Local change: the gem pushes `social[1].url` unguarded, so any key it has
-          no case for and that is a plain string -- `cv_pdf` here -- pushed a nil
-          and the rendered sameAs array started with a literal `null`.
+          Local change: the gem pushes `social[1].url` unguarded, so any key it has no case for and that is a plain string -- `cv_pdf` here -- pushed a nil and the rendered sameAs array started with a literal `null`.
         {% endcomment %}
         {% if social[1].url %}
           {% assign sameaslinks = sameaslinks | push: social[1].url %}
@@ -264,14 +248,7 @@
         "url": "{{ page.url | prepend: site.baseurl | prepend: site.url }}",
         "@type": "{% if is_blog_post %}BlogPosting{% else %}WebSite{% endif %}",
         {% comment %}
-          Local change: `site.description` is a folded YAML scalar, so it ends in a
-          newline, and the gem interpolated it raw between quotes -- a literal line
-          break inside a JSON string, which makes the whole block invalid JSON-LD
-          and silently unusable. Hand the value to `jsonify` instead, which quotes
-          and escapes it; `strip_html` is there because a page `description` may
-          contain a link (/publications/ does).
-          The gem also wrote `{% raw %}{% else if %}{% endraw %}`, which Liquid parses as a plain
-          `else` -- harmless, but it is why this only ever used `site.description`.
+          Local change: `site.description` is a folded YAML scalar, so it ends in a newline, and the gem interpolated it raw between quotes -- a literal line break inside a JSON string, which makes the whole block invalid JSON-LD and silently unusable. Hand the value to `jsonify` instead, which quotes and escapes it; `strip_html` is there because a page `description` may contain a link (/publications/ does). The gem also wrote `{% raw %}{% else if %}{% endraw %}`, which Liquid parses as a plain `else` -- harmless, but it is why this only ever used `site.description`.
         {% endcomment %}
         {%- if page.description -%}
           {%- assign schema_description = page.description -%}
@@ -289,12 +266,7 @@
   </script>
 
   {% comment %}
-    Local addition: the block above describes the *page* (`WebSite`), with the
-    person only as a bare `author` name. That is too thin to tie this site to the
-    Dahai Yu who is at FSU and on Scholar / ORCID / DBLP. On the site root, emit a
-    ProfilePage whose mainEntity is a full Person -- affiliation, alumniOf, image,
-    and the same sameAs list -- which is the pairing Google documents for a
-    personal profile page. Driven by `person:` in _config.yml.
+    Local addition: the block above describes the *page* (`WebSite`), with the person only as a bare `author` name. That is too thin to tie this site to the Dahai Yu who is at FSU and on Scholar / ORCID / DBLP. On the site root, emit a ProfilePage whose mainEntity is a full Person -- affiliation, alumniOf, image, and the same sameAs list -- which is the pairing Google documents for a personal profile page. Driven by `person:` in _config.yml.
   {% endcomment %}
   {% if page.url == '/' and site.person %}
     <script type="application/ld+json">

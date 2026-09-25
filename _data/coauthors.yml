@@ -1,8 +1,5 @@
-# Coauthor homepages, linked automatically from the publications page.
-# Key is the lowercased last name; `firstname` lists the variants used in the .bib.
-# Only add URLs you have actually checked — a stale link is worse than no link.
-# Note: `max_author_limit` in _config.yml means only the first authors are shown
-# until the reader clicks, so the early authors matter most here.
+# Coauthor homepages, linked automatically from the publications page. Key is the lowercased last name; `firstname` lists the variants used in the .bib. Only add URLs you have actually checked — a stale link is worse than no link.
+# Note: `max_author_limit` in _config.yml means only the first authors are shown until the reader clicks, so the early authors matter most here.
 "wang":
   - firstname: ["Guang"]
     url: https://guangwang.me/

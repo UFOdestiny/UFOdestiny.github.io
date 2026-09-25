@@ -1,7 +1,4 @@
-# CV content, rendered by the al_folio_cv plugin (rendercv format).
-# Delete a whole section and it disappears from /cv/.
-# The authority for everything here is assets/pdf/dahai_yu_cv.pdf: where this page
-# and that PDF disagreed, the PDF won. Keep them in sync when either changes.
+# CV content, rendered by the al_folio_cv plugin (rendercv format). Delete a whole section and it disappears from /cv/. The authority for everything here is assets/pdf/dahai_yu_cv.pdf: where this page and that PDF disagreed, the PDF won. Keep them in sync when either changes.
 cv:
   name: Dahai Yu
   label: Ph.D. Student in Computer Science
@@ -9,9 +6,7 @@ cv:
   location: Tallahassee, FL, USA
   image: ""
   summary: >
-    Computer Science Ph.D. student at Florida State University working on trustworthy
-    spatiotemporal machine learning — uncertainty quantification, generative models for
-    urban data, and decision pipelines for energy, healthcare access, and disaster resilience.
+    Computer Science Ph.D. student at Florida State University working on trustworthy spatiotemporal machine learning — uncertainty quantification, generative models for urban data, and decision pipelines for energy, healthcare access, and disaster resilience.
 
   social_networks:
     - network: GitHub
@@ -51,8 +46,7 @@ cv:
         start_date: 2023
         end_date: present
         summary: >
-          Lead author on uncertainty-aware spatiotemporal prediction projects spanning
-          energy demand, human mobility, and healthcare access.
+          Lead author on uncertainty-aware spatiotemporal prediction projects spanning energy demand, human mobility, and healthcare access.
         highlights:
           - First-authored papers at AAAI, IJCAI, ACM SIGKDD, and ACM SIGSPATIAL; coauthored at NeurIPS, ACM IMWUT, and ACM CIKM.
 
@@ -69,8 +63,7 @@ cv:
       - title: The Dean's Award for Doctoral Excellence
         date: 2026
         awarder: Florida State University
-      # The CV PDF lists both Peking University honors under one "2021 - 2022" range,
-      # so both carry that range; the badge shows only the first year.
+      # The CV PDF lists both Peking University honors under one "2021 - 2022" range, so both carry that range; the badge shows only the first year.
       - title: Challenge Cup, Second Prize
         date: 2021-2022
         awarder: Peking University

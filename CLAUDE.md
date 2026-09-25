@@ -34,7 +34,7 @@ Deliberately off — to re-enable, restore every piece listed:
 
 ## The seven local theme files
 
-Each gem copy keeps the gem's text verbatim apart from edits marked `Local change:`, so a theme upgrade stays diffable. Prefer `_config.yml` or content over adding an eighth.
+Each gem copy keeps the gem's code verbatim apart from edits marked `Local change:` (only its comments were reflowed to one line per paragraph), so a theme upgrade stays diffable. Prefer `_config.yml` or content over adding an eighth.
 
 - `_includes/metadata.liquid` — appends `tagline` to the home `<title>`; renders `google_site_verification`; drops the Twitter card and `x_username` sameAs case; guards the gem's `null` in `sameAs`; fixes invalid JSON-LD `description`; emits a schema.org `ProfilePage`/`Person` (from `person:` in `_config.yml`) on `/` only.
 - `_layouts/about.liquid` — portrait alt from `page.profile.image_alt`; capitalised section headings.
@@ -103,7 +103,7 @@ Where `assets/pdf/dahai_yu_cv.pdf` and the site disagree, the PDF wins (email `d
 
 ## Checks
 
-`python3 tools/check.py` (needs PyYAML; skips YAML parsing without it) checks conventions that live in two places at once: plugin lists, `abbr` vs `venues.yml`, `preview` files and their size/aspect, custom bib fields vs `filtered_bibtex_keywords`, `about.md` anchors vs citekeys, the email and `cv_pdf` across files, `nav_order` collisions, `_news` filename vs date, `tools/` in `exclude:`, font sizes below 1rem in our CSS (`FONT_FLOOR_EXCEPTIONS` is the escape hatch), the Ruby pin shared by both workflows, and the local overrides' `Local change:` markers.
+`python3 tools/check.py` (needs PyYAML; skips YAML parsing without it) checks conventions that live in two places at once: plugin lists, `abbr` vs `venues.yml`, `preview` files and their size/aspect, custom bib fields vs `filtered_bibtex_keywords`, `about.md` anchors vs citekeys, the email and `cv_pdf` across files, `nav_order` collisions, `_news` filename vs date, one line per bib field, `tools/` in `exclude:`, font sizes below 1rem in our CSS (`FONT_FLOOR_EXCEPTIONS` is the escape hatch), the Ruby pin shared by both workflows, and the local overrides' `Local change:` markers.
 
 **When you add a convention that must hold in two files, add a check for it.** Errors render wrong or fail; warnings will rot. CI (`ci.yml`) runs `--strict`; the deploy doesn't, so a warning never blocks publishing.
 

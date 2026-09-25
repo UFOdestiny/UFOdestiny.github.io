@@ -1,18 +1,12 @@
 #!/usr/bin/env python3
 """Consistency checks for this site, runnable without a Ruby toolchain.
 
-There is no local Jekyll build (see CLAUDE.md), so a mistake in the content or in
-one of the paired config lists is otherwise only caught by the `Deploy site` run.
-This catches the classes of mistake that a build would *not* catch anyway --
-a plugin listed in only one of the two lists, a `preview` pointing at a missing
-file, an anchor in about.md that no longer names a bib entry -- plus the YAML
-syntax errors that a build catches slowly.
+There is no local Jekyll build (see CLAUDE.md), so a mistake in the content or in one of the paired config lists is otherwise only caught by the `Deploy site` run. This catches the classes of mistake that a build would *not* catch anyway -- a plugin listed in only one of the two lists, a `preview` pointing at a missing file, an anchor in about.md that no longer names a bib entry -- plus the YAML syntax errors that a build catches slowly.
 
     python3 tools/check.py            # errors and warnings
     python3 tools/check.py --strict   # treat warnings as errors too
 
-Exit status is non-zero when there is anything to fix. Add a check here whenever
-you add a convention that lives in two places.
+Exit status is non-zero when there is anything to fix. Add a check here whenever you add a convention that lives in two places.
 """
 
 from __future__ import annotations
@@ -54,10 +48,7 @@ except ModuleNotFoundError:  # pragma: no cover - depends on the environment
 def load_yaml(text: str, label: str):
     """Parse YAML, reporting the failure against `label`.
 
-    Returns None when the content could not be parsed (or PyYAML is missing).
-    Every caller treats None as "unknown" and skips the checks that read it --
-    one syntax error should report itself once, not as a cascade of everything
-    that file was supposed to contain.
+    Returns None when the content could not be parsed (or PyYAML is missing). Every caller treats None as "unknown" and skips the checks that read it -- one syntax error should report itself once, not as a cascade of everything that file was supposed to contain.
     """
     if yaml is None:
         return None
@@ -93,9 +84,7 @@ def rel(path: Path) -> str:
 # BibTeX
 # --------------------------------------------------------------------------- #
 
-# Fields that are bibliography data. Anything else in an entry is an al-folio
-# field and has to be in `filtered_bibtex_keywords` or it shows up in the BibTeX
-# popup on /publications/.
+# Fields that are bibliography data. Anything else in an entry is an al-folio field and has to be in `filtered_bibtex_keywords` or it shows up in the BibTeX popup on /publications/.
 STANDARD_BIBTEX_FIELDS = {
     "address", "annote", "author", "booktitle", "chapter", "crossref", "doi",
     "edition", "editor", "howpublished", "institution", "journal", "key",
@@ -188,8 +177,7 @@ def check_yaml_files() -> dict:
         front_matter(path)
     for path in sorted((ROOT / "_news").glob("*.md")):
         front_matter(path)
-    # The workflows are the only thing that ever builds this site, so a typo in
-    # one of them is not something to discover from a run that never started.
+    # The workflows are the only thing that ever builds this site, so a typo in one of them is not something to discover from a run that never started.
     for path in sorted((ROOT / ".github").rglob("*.yml")):
         load_yaml(read(path), rel(path))
     return {"data": data, "config": config}
@@ -224,8 +212,7 @@ def check_plugin_lists(config: dict) -> None:
         error(f"Gemfile has gem `{name}` but `plugins:` in _config.yml does not "
               f"list it -- it is installed but inert")
 
-    # Jekyll copies any top-level directory it does not recognise straight into
-    # _site, so a dev directory has to be excluded or it is published.
+    # Jekyll copies any top-level directory it does not recognise straight into _site, so a dev directory has to be excluded or it is published.
     excluded = {str(x) for x in (config.get("exclude") or [])}
     for name in ("tools",):
         if (ROOT / name).is_dir() and name not in excluded:
@@ -300,9 +287,7 @@ def check_bibliography(config: dict, data: dict) -> None:
                              f"which makes its row much taller than the rest -- "
                              f"crop a landscape figure instead (see CLAUDE.md)")
 
-        # A published entry has doi/html, a preprint has arxiv (and says so in
-        # `journal`). An entry with neither is under review, and `note` is the
-        # only thing that can say so on the page.
+        # A published entry has doi/html, a preprint has arxiv (and says so in `journal`). An entry with neither is under review, and `note` is the only thing that can say so on the page.
         if not any(entry.fields.get(f) for f in ("doi", "html", "arxiv", "note")):
             error(f"{where}: no `doi`, `html`, `arxiv` or `note` -- the entry "
                   f"renders with nothing saying where it is or what its status is")
@@ -320,6 +305,17 @@ def check_bibliography(config: dict, data: dict) -> None:
     for name in sorted(on_disk - referenced_previews):
         warn(f"assets/img/publication_preview/{name} is referenced by no entry "
              f"in papers.bib")
+
+    # One line per field: a value wrapped across lines renders the break as a space, so a word hyphenated at the break shows up as "privacy- preserving".
+    in_entry = False
+    for number, line in enumerate(read(ROOT / "_bibliography" / "papers.bib").splitlines(), start=1):
+        stripped = line.strip()
+        if stripped.startswith("@") and not stripped.lower().startswith(("@string", "@preamble", "@comment")):
+            in_entry = True
+        elif in_entry and stripped == "}":
+            in_entry = False
+        elif in_entry and stripped and not re.match(r"[A-Za-z_-]+\s*=", stripped):
+            warn(f"papers.bib:{number}: a field value continues onto this line -- keep each field on one line")
 
     check_about_anchors({e.key for e in entries})
     check_coauthors(entries, data)
@@ -421,13 +417,10 @@ def check_news() -> None:
                   f"filename date {match.group(1)}")
 
 
-# Our own CSS holds a floor: nothing a reader reads as prose goes below 1rem,
-# the size of the home page subtitle (`<p class="desc">`, unstyled, so it
-# inherits the body). See the section at the end of _sass/_local.scss.
+# Our own CSS holds a floor: nothing a reader reads as prose goes below 1rem, the size of the home page subtitle (`<p class="desc">`, unstyled, so it inherits the body). See the section at the end of _sass/_local.scss.
 READING_FONT_FLOOR_REM = 1.0
 
-# Sizes below the floor that are deliberate. Keyed by the source line itself
-# rather than a line number, so it survives the file being reordered:
+# Sizes below the floor that are deliberate. Keyed by the source line itself rather than a line number, so it survives the file being reordered:
 #   "_sass/_local.scss|font-size: 0.75rem;": "the venue badge is a label"
 FONT_FLOOR_EXCEPTIONS: dict[str, str] = {}
 
@@ -435,15 +428,9 @@ FONT_FLOOR_EXCEPTIONS: dict[str, str] = {}
 def check_font_sizes() -> None:
     """Flag a font-size below the floor in a file we wrote.
 
-    The gem is full of 0.7-0.9rem text and _sass/_local.scss raises the parts of
-    it this site actually renders. This is what keeps a later addition of ours
-    from quietly reintroducing the thing we just fixed.
+    The gem is full of 0.7-0.9rem text and _sass/_local.scss raises the parts of it this site actually renders. This is what keeps a later addition of ours from quietly reintroducing the thing we just fixed.
     """
-    # Only files whose CSS is ours to choose. `_sass/_footer.scss` and
-    # `assets/css/main.scss` are gem content kept verbatim (the point of those
-    # two shadows is that a theme upgrade stays diffable), so their 0.75rem and
-    # 0.9rem are not ours to raise -- `_local.scss` overrides the one that
-    # renders instead.
+    # Only files whose CSS is ours to choose. `_sass/_footer.scss` and `assets/css/main.scss` are gem content kept verbatim (the point of those two shadows is that a theme upgrade stays diffable), so their 0.75rem and 0.9rem are not ours to raise -- `_local.scss` overrides the one that renders instead.
     files = [
         ROOT / "_sass" / "_local.scss",
         *sorted((ROOT / "_pages").glob("*.md")),
@@ -473,11 +460,7 @@ def check_font_sizes() -> None:
 def check_workflows() -> None:
     """The two workflows build the same site, so they must build it the same way.
 
-    deploy.yml and ci.yml each set up Ruby and ImageMagick themselves (a
-    reusable workflow for four lines would be worse), which makes the Ruby pin a
-    second list to keep in sync -- exactly the kind of thing this script exists
-    to watch. The pin matters: an older RubyGems cannot read the libc-qualified
-    platform names in Gemfile.lock.
+    deploy.yml and ci.yml each set up Ruby and ImageMagick themselves (a reusable workflow for four lines would be worse), which makes the Ruby pin a second list to keep in sync -- exactly the kind of thing this script exists to watch. The pin matters: an older RubyGems cannot read the libc-qualified platform names in Gemfile.lock.
     """
     workflows = sorted((ROOT / ".github" / "workflows").glob("*.yml"))
     pins: dict[str, str] = {}
@@ -505,8 +488,7 @@ def check_workflows() -> None:
 def check_local_overrides() -> None:
     """The seven local files exist and each says what is local about it.
 
-    That marker is the whole upgrade story: without it, a later reader cannot
-    tell our edit from the gem's own lines.
+    That marker is the whole upgrade story: without it, a later reader cannot tell our edit from the gem's own lines.
     """
     marker = re.compile(r"local (change|override|addition|partial)", re.IGNORECASE)
     overrides = [
@@ -516,8 +498,7 @@ def check_local_overrides() -> None:
         "_sass/_local.scss",
         "assets/css/main.scss",
     ]
-    # Wholly ours, so there is nothing local to mark -- only their presence is
-    # checked, because CLAUDE.md documents each one.
+    # Wholly ours, so there is nothing local to mark -- only their presence is checked, because CLAUDE.md documents each one.
     own_files = [
         "_plugins/social_link_labels.rb",
         "_plugins/prune_theme_assets.rb",

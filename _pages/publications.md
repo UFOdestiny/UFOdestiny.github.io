@@ -10,20 +10,14 @@ nav_order: 1
 {% include bib_search.liquid %}
 
 {% comment %}
-  jekyll-scholar renders each year group as a bare `<h2 class="bibliography">2026</h2>`
-  with no id, and offers no config for one. So capture the bibliography, give the
-  headings ids with the `regex_replace` filter (jekyll-regex-replace), then read the
-  year list back out of the same string — splitting on the id marker leaves each year
-  at the start of a chunk. That keeps the nav below in sync with the .bib for free,
-  and the anchors are real HTML, so /publications/#2025 works without JavaScript.
+  jekyll-scholar renders each year group as a bare `<h2 class="bibliography">2026</h2>` with no id, and offers no config for one. So capture the bibliography, give the headings ids with the `regex_replace` filter (jekyll-regex-replace), then read the year list back out of the same string — splitting on the id marker leaves each year at the start of a chunk. That keeps the nav below in sync with the .bib for free, and the anchors are real HTML, so /publications/#2025 works without JavaScript.
 {% endcomment %}
 {% capture bibliography %}{% bibliography %}{% endcapture %}
 {% assign bibliography = bibliography | regex_replace: '<h2 class="bibliography">(\d+)</h2>', '<h2 class="bibliography" id="\1">\1</h2>' %}
 {% assign year_chunks = bibliography | split: '<h2 class="bibliography" id="' %}
 
 <style>
-  /* Local to this page: the year nav and the scroll offset its anchors need, so
-     `navbar_fixed: true` does not park a heading underneath the navbar. */
+  /* Local to this page: the year nav and the scroll offset its anchors need, so `navbar_fixed: true` does not park a heading underneath the navbar. */
   .publication-years {
     display: flex;
     flex-wrap: wrap;
@@ -34,8 +28,7 @@ nav_order: 1
     border: 1px solid var(--global-divider-color);
     border-radius: 4px;
     padding: 0.1rem 0.55rem;
-    /* 1rem, like every other piece of reading text -- see the font-size floor
-       in _sass/_local.scss. */
+    /* 1rem, like every other piece of reading text -- see the font-size floor in _sass/_local.scss. */
     font-size: 1rem;
     color: var(--global-text-color-light);
   }

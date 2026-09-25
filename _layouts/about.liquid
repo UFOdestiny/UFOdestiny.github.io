@@ -28,10 +28,7 @@ layout: default
           {% capture sizes %}(min-width: {{ site.max_width }}) {{ site.max_width | minus: 30 | times: 0.3}}px, (min-width: 576px)
       30vw, 95vw"{% endcapture %}
           {% comment %}
-            Local change: the gem passes alt=page.profile.image, so a screen reader
-            reads out the file name ("prof_pic.jpg"). Take `page.profile.image_alt`
-            from the front matter when it is set, and fall back to the gem's
-            behaviour when it is not.
+            Local change: the gem passes alt=page.profile.image, so a screen reader reads out the file name ("prof_pic.jpg"). Take `page.profile.image_alt` from the front matter when it is set, and fall back to the gem's behaviour when it is not.
           {% endcomment %}
           {% assign profile_image_alt = page.profile.image_alt | default: page.profile.image %}
           {%
@@ -48,8 +45,7 @@ layout: default
     <div class="clearfix">{{ content }}</div>
 
     {% comment %}
-      Local change: the "News" and "Selected Publications" headings are capitalised
-      to match the page titles (the gem ships them lowercase).
+      Local change: the "News" and "Selected Publications" headings are capitalised to match the page titles (the gem ships them lowercase).
     {% endcomment %}
     <!-- News -->
     {% if page.announcements and page.announcements.enabled %}

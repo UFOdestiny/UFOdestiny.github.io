@@ -1,10 +1,7 @@
 /*******************************************************************************
  * Footer styles.
  *
- * LOCAL OVERRIDE of al_folio_core/_sass/_footer.scss (same file name shadows the
- * gem's partial, because the site's own `_sass/` comes first on the Sass load
- * path). Everything below the "local addition" marker is ours; the rest is the
- * gem's content, kept verbatim so `bundle update` diffs stay readable.
+ * LOCAL OVERRIDE of al_folio_core/_sass/_footer.scss (same file name shadows the gem's partial, because the site's own `_sass/` comes first on the Sass load path). Everything below the "local addition" marker is ours; the rest is the gem's content, kept verbatim so `bundle update` diffs stay readable.
  ******************************************************************************/
 
 footer.fixed-bottom {
@@ -40,11 +37,7 @@ footer.sticky-bottom {
 }
 
 /* ---------------------------- local addition ------------------------------ *
- * With `footer_fixed: false` the copyright line is a normal block at the end of
- * the document. On short pages (/news/, a single news item) that leaves it
- * stranded in the middle of the window, looking like a floating banner. Make the
- * page at least as tall as the viewport and push the footer to its bottom, so
- * the copyright is always the last thing on the page and never mid-screen.
+ * With `footer_fixed: false` the copyright line is a normal block at the end of the document. On short pages (/news/, a single news item) that leaves it stranded in the middle of the window, looking like a floating banner. Make the page at least as tall as the viewport and push the footer to its bottom, so the copyright is always the last thing on the page and never mid-screen.
  * ------------------------------------------------------------------------- */
 
 body.sticky-bottom-footer {

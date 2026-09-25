@@ -35,10 +35,7 @@
   url: https://pubsonline.informs.org/journal/mnsc
   color: "#7a5a1f"
 
-# Not a venue, but the same badge slot: every entry without a DOI is on arXiv, and
-# `note` carries the status line ("Submitted to AAAI 2027."). The old grey was
-# #9aa1a9, which put white badge text at 2.6:1 -- the only colour here below the
-# ~5:1 the others sit at, and it read as a disabled badge.
+# Not a venue, but the same badge slot: every entry without a DOI is on arXiv, and `note` carries the status line ("Submitted to AAAI 2027."). The old grey was #9aa1a9, which put white badge text at 2.6:1 -- the only colour here below the ~5:1 the others sit at, and it read as a disabled badge.
 "arXiv":
   url: https://arxiv.org/
   color: "#556680"
