@@ -1,0 +1,12 @@
+# Social media links and usernames, displayed in the order defined here.
+# See the jekyll-socials plugin docs: https://github.com/george-gca/jekyll-socials
+cv_pdf: /assets/pdf/dahai_yu_cv.pdf # path to your CV PDF file
+email: dahai.yu@fsu.edu # your email address (matches assets/pdf/dahai_yu_cv.pdf)
+dblp_url: https://dblp.org/pid/31/2647-2.html # DBLP author page
+scholar_userid: 8eH-vRUAAAAJ # your Google Scholar ID (the `user=` value in the profile URL)
+github_username: UFOdestiny # your GitHub username
+linkedin_username: dahai-yu-0bb09a272 # your LinkedIn handle
+orcid_id: 0009-0006-5090-9070 # your ORCID iD, e.g. 0000-0002-1825-0097
+# semanticscholar_id: # Semantic Scholar author ID
+# rss_icon: -- keep this commented out, not `false`: jekyll-socials renders
+# every key that is present, whatever its value.

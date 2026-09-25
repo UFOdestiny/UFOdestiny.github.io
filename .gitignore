@@ -1,0 +1,6 @@
+# Nothing is built locally (GitHub Actions is the only build), so this only
+# keeps OS and editor clutter out.
+.DS_Store
+.idea/
+.vscode/
+__pycache__/

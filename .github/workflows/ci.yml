@@ -1,0 +1,64 @@
+name: Check
+
+# Pre-flight for a change, so a mistake surfaces before it is on main. There is
+# no local build (see CLAUDE.md), so without this the `Deploy site` run is the
+# first thing that ever looks at a change -- i.e. the site is the test.
+#
+# Two steps, cheapest first: the content checks in tools/check.py (a few seconds,
+# no Ruby) and then the same production build `Deploy site` does, minus the
+# deploy. Ruby and ImageMagick are set up exactly as in deploy.yml, and
+# tools/check.py asserts the two files pin the same Ruby.
+
+on:
+  pull_request:
+  push:
+    branches-ignore: [main] # main is covered by Deploy site, which runs the same checks
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      # setup-python rather than the runner's own python3: pip cannot install
+      # into a system Python that is marked externally managed (PEP 668).
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install PyYAML
+        run: python3 -m pip install --quiet pyyaml
+
+      # Warnings fail the run here but not locally: on a branch there is time to
+      # deal with them, and they are the kind of thing that never gets cleaned up
+      # once it is merged.
+      - name: Content checks
+        run: python3 tools/check.py --strict
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "4.0"
+          bundler-cache: true
+
+      - name: Install ImageMagick
+        run: sudo apt-get update && sudo apt-get install -y imagemagick
+
+      - name: Build
+        run: JEKYLL_ENV=production bundle exec jekyll build

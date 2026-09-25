@@ -1,0 +1,31 @@
+# Version bumps arrive as pull requests, which the Check workflow then builds --
+# so a bump that breaks the site shows up as a red PR instead of a red deploy.
+#
+# Both ecosystems need this: every al_folio_* gem is pinned to an exact version
+# in the Gemfile (`= 1.0.15`), so `bundle update` alone will never move them, and
+# nothing otherwise announces that a new one exists. Same for the `@v5` action
+# refs, which float across patches but not across majors.
+version: 2
+updates:
+  - package-ecosystem: bundler
+    directory: "/"
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 3
+    groups:
+      # One PR for the theme runtime: the al_folio_* gems are released together
+      # and share layouts, so reviewing them one at a time means building
+      # combinations that were never tested upstream.
+      al-folio:
+        patterns: ["al_folio_*", "al_icons", "al_citations", "al_img_tools", "al_search"]
+      jekyll:
+        patterns: ["jekyll", "jekyll-*", "jemoji"]
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 3
+    groups:
+      actions:
+        patterns: ["*"]

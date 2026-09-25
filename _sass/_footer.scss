@@ -1,0 +1,60 @@
+/*******************************************************************************
+ * Footer styles.
+ *
+ * LOCAL OVERRIDE of al_folio_core/_sass/_footer.scss (same file name shadows the
+ * gem's partial, because the site's own `_sass/` comes first on the Sass load
+ * path). Everything below the "local addition" marker is ours; the rest is the
+ * gem's content, kept verbatim so `bundle update` diffs stay readable.
+ ******************************************************************************/
+
+footer.fixed-bottom {
+  background-color: var(--global-footer-bg-color);
+  font-size: 0.75rem;
+
+  .container {
+    color: var(--global-footer-text-color);
+    padding-top: 9px;
+    padding-bottom: 8px;
+    text-align: center;
+  }
+
+  a {
+    color: var(--global-footer-link-color);
+
+    &:hover {
+      color: var(--global-theme-color);
+      text-decoration: none;
+    }
+  }
+}
+
+footer.sticky-bottom {
+  border-top: 1px solid var(--global-divider-color);
+  padding-top: 40px;
+  padding-bottom: 40px;
+  font-size: 0.9rem;
+
+  .container {
+    text-align: center;
+  }
+}
+
+/* ---------------------------- local addition ------------------------------ *
+ * With `footer_fixed: false` the copyright line is a normal block at the end of
+ * the document. On short pages (/news/, a single news item) that leaves it
+ * stranded in the middle of the window, looking like a floating banner. Make the
+ * page at least as tall as the viewport and push the footer to its bottom, so
+ * the copyright is always the last thing on the page and never mid-screen.
+ * ------------------------------------------------------------------------- */
+
+body.sticky-bottom-footer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  > footer.sticky-bottom {
+    margin-top: auto !important; // beats Bootstrap-style `mt-5` on the element
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}
